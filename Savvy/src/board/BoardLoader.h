@@ -1,10 +1,10 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
-class BoardTile
+class BoardLoader
 {
 public:
-
+	std::vector<sf::Sprite*> boardTileMap;
 
 private:
 	sf::Texture plainTileTexture;
@@ -22,6 +22,9 @@ private:
 	sf::Texture tlTileTexture;
 	sf::Sprite tlTileSprite;
 
+	sf::Texture startTileTexture;
+	sf::Sprite startTileSprite;
+
 	sf::Vector2f textureSize;
 	sf::Vector2f ratio;
 	sf::Vector2f worldUnits;
@@ -32,8 +35,8 @@ private:
 	int positionY = 0;
 
 public:
-	BoardTile();
-	~BoardTile();
+	BoardLoader();
+	~BoardLoader();
 
 	void Initialize();
 

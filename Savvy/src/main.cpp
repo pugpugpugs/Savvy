@@ -1,18 +1,22 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "BoardTile.h"
+#include "board/BoardLoader.h"
+#include "board/GameBoard.h"
 
 
 int main() 
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
-	sf::RenderWindow window(sf::VideoMode(1600, 900), "Game", sf::Style::Default, settings);
+	sf::RenderWindow window(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
 	window.setFramerateLimit(250);
 
 	// Init
-	BoardTile tile;
-	tile.Initialize();
+	BoardLoader boardLoader;
+	boardLoader.Initialize();
+
+	GameBoard board;
+	board.Initialize(boardLoader.boardTileMap);
 
 	// Load
 
@@ -42,7 +46,9 @@ int main()
 
 		window.clear(sf::Color::Red);
 
-		tile.Draw(window);
+		//boardLoader.Draw(window);
+
+		board.Draw(window);
 
 		window.display();
 	}
