@@ -2,6 +2,7 @@
 #include <SFML/Graphics.hpp>
 #include "board/BoardLoader.h"
 #include "board/GameBoard.h"
+#include "board/BoardTileSettings.h"
 
 
 int main() 
@@ -12,11 +13,13 @@ int main()
 	window.setFramerateLimit(250);
 
 	// Init
-	BoardLoader boardLoader;
+	const BoardTileSettings tileSettings;
+	BoardLoader boardLoader(tileSettings);
 	boardLoader.Initialize();
 
-	GameBoard board;
-	board.Initialize(boardLoader.boardTileMap);
+	NormalBoard boardType;
+	GameBoard board(tileSettings);
+	board.Initialize(boardLoader.boardTileMap, boardType);
 
 	// Load
 

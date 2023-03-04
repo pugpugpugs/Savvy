@@ -27,6 +27,9 @@
     <ClCompile Include="src\board\BoardTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\board\BoardTileSettings.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\darkgreen.png">
@@ -55,10 +58,19 @@
     <ClInclude Include="src\board\GameBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\Enums.h">
+    <ClInclude Include="src\shared\Enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="src\board\BoardTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\board\BoardTileSettings.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\board\NormalBoard.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\shared\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

@@ -144,6 +144,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\board\BoardTile.cpp" />
+    <ClCompile Include="src\board\BoardTileSettings.cpp" />
     <ClCompile Include="src\board\GameBoard.cpp" />
     <ClCompile Include="src\board\BoardLoader.cpp" />
     <ClCompile Include="src\main.cpp" />
@@ -157,8 +158,11 @@
     <Image Include="assets\woodtiles.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\board\BoardTileSettings.h" />
     <ClInclude Include="src\board\BoardTile.h" />
-    <ClInclude Include="src\Enums.h" />
+    <ClInclude Include="src\board\NormalBoard.h" />
+    <ClInclude Include="src\shared\Constants.h" />
+    <ClInclude Include="src\shared\Enums.h" />
     <ClInclude Include="src\board\GameBoard.h" />
     <ClInclude Include="src\board\BoardLoader.h" />
   </ItemGroup>

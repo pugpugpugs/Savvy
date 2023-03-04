@@ -1,5 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
+#include "BoardTileSettings.h"
 
 class BoardLoader
 {
@@ -7,6 +8,8 @@ public:
 	std::vector<sf::Sprite*> boardTileMap;
 
 private:
+	const BoardTileSettings* tileSettings;
+
 	sf::Texture plainTileTexture;
 	sf::Sprite plainTileSprite;
 
@@ -25,22 +28,13 @@ private:
 	sf::Texture startTileTexture;
 	sf::Sprite startTileSprite;
 
-	sf::Vector2f textureSize;
-	sf::Vector2f ratio;
-	sf::Vector2f worldUnits;
-	sf::Vector2f pixelSize;
-	sf::Vector2f scale;
-
-	int positionX = 0;
-	int positionY = 0;
-
 public:
-	BoardLoader();
+	BoardLoader(const BoardTileSettings& tileSettings);
 	~BoardLoader();
 
 	void Initialize();
 
-	void Load(sf::Texture& texture, sf::Sprite& sprite, std::string path);
+	void Load(sf::Texture& texture, sf::Sprite& sprite,const std::string& path);
 
 	void Draw(sf::RenderWindow& window);
 

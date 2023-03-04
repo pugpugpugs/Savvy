@@ -1,15 +1,15 @@
 #include "GameBoard.h"
 
-
-GameBoard::GameBoard()
+GameBoard::GameBoard(const BoardTileSettings& tileSettings)
 {
+	this->tileSettings = &tileSettings;
 }
 
 GameBoard::~GameBoard()
 {
 }
 
-void GameBoard::Initialize(std::vector<sf::Sprite*> boardTileMap)
+void GameBoard::Initialize(std::vector<sf::Sprite*> boardTileMap, NormalBoard& board)
 {
 	int positionX = 0;
 	int positionY = 0;
@@ -22,15 +22,14 @@ void GameBoard::Initialize(std::vector<sf::Sprite*> boardTileMap)
 
 			BoardTile boardTile;
 			boardTiles.push_back(boardTile);
-			boardTiles[index].sprite = *boardTileMap[standardBoardMap[index]];
+			boardTiles[index].sprite = *boardTileMap[board.standardBoardMap[index]];
 
 			boardTiles[index].sprite.setPosition(positionX, positionY);
 
-			// world unit / pixel size * width - need to change later to variables 
-			positionX += (64 / 10) * 14;
+			positionX += tileSettings->offset.x;
 		}
 		positionX = 0;
-		positionY += (64 / 10) * 14;
+		positionY += (tileSettings->worldUnitPixelAmount / tileSettings->texturePixelSize) * tileSettings->height;
 	}
 }
 

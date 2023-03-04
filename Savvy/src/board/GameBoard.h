@@ -2,27 +2,24 @@
 #include <string>
 #include <vector>
 #include <SFML/Graphics.hpp>
-#include "../Enums.h"
+#include "../shared/Enums.h"
 #include "BoardTile.h"
+#include "BoardTileSettings.h"
+#include "NormalBoard.h"
 
 class GameBoard
 {
 public: 
-	int standardBoardMap[25] = { 
-		BoardTileType::TWTile,  BoardTileType::NormalTile, BoardTileType::DWTile, BoardTileType::NormalTile, BoardTileType::TWTile,
-		BoardTileType::NormalTile,  BoardTileType::DLTile, BoardTileType::NormalTile, BoardTileType::DLTile, BoardTileType::NormalTile,
-		BoardTileType::TLTile,  BoardTileType::NormalTile, BoardTileType::StartTile, BoardTileType::NormalTile, BoardTileType::TLTile,
-		BoardTileType::NormalTile,  BoardTileType::DLTile, BoardTileType::NormalTile, BoardTileType::DLTile, BoardTileType::NormalTile,
-		BoardTileType::TWTile,  BoardTileType::NormalTile, BoardTileType::DWTile, BoardTileType::NormalTile, BoardTileType::TWTile
-	};
-
 	std::vector<BoardTile> boardTiles;
 
+private:
+	const BoardTileSettings* tileSettings;
+
 public:
-	GameBoard();
+	GameBoard(const BoardTileSettings& tileSettings);
 	~GameBoard();
 
-	void Initialize(std::vector<sf::Sprite*> boardTileMap);
+	void Initialize(std::vector<sf::Sprite*> boardTileMap, NormalBoard& board);
 	void Draw(sf::RenderWindow& window);
 };
 
