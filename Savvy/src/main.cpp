@@ -1,8 +1,12 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "board/BoardLoader.h"
-#include "board/GameBoard.h"
-#include "board/BoardTileSettings.h"
+#include "GameBoard.h"
+#include "BoardLoader.h"
+#include "BoardTiles/NormalTile.h"
+#include "BoardTiles/DwTile.h"
+#include <BoardTiles/BoardTileFactory.h>
+#include <Game/Game.h>
+#include <Game/GameRender.h>
 
 
 int main() 
@@ -10,16 +14,19 @@ int main()
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	sf::RenderWindow window(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
-	window.setFramerateLimit(250);
+	window.setFramerateLimit(60);
 
-	// Init
-	const BoardTileSettings tileSettings;
-	BoardLoader boardLoader(tileSettings);
-	boardLoader.Initialize();
+	Game game;
 
-	NormalBoard boardType;
-	GameBoard board(tileSettings);
-	board.Initialize(boardLoader.boardTileMap, boardType);
+	game.Initialize();
+
+	game.Start();
+
+	NormalTile tile;
+	NormalTile tile2;
+
+	// add method to get texture by id from render
+	
 
 	// Load
 
@@ -42,19 +49,22 @@ int main()
 			}
 		}
 
-		// Update
-
-
-		// Draw
-
 		window.clear(sf::Color::Red);
 
-		//boardLoader.Draw(window);
+		//for (auto& tile : game.boardTiles)
+		//{
+		//	tile.Draw(window);
+		//}
 
-		board.Draw(window);
+		//tile.Draw(window);
+
+		GameRender::Draw(window, tile.id);
+
 
 		window.display();
 	}
 
 	return 0;
+
 }
+
