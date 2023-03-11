@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup Label="ProjectConfigurations">
     <ProjectConfiguration Include="Debug|Win32">
@@ -112,8 +112,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -130,8 +130,8 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)\include;$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp20</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -143,10 +143,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="src\board\BoardTile.cpp" />
-    <ClCompile Include="src\board\BoardTileSettings.cpp" />
-    <ClCompile Include="src\board\GameBoard.cpp" />
-    <ClCompile Include="src\board\BoardLoader.cpp" />
+    <ClCompile Include="src\Game\GameRender.cpp" />
+    <ClCompile Include="include\Board\Layout.h" />
+    <ClCompile Include="src\Game\Game.cpp" />
+    <ClCompile Include="src\BoardTiles\BoardTileFactory.cpp" />
+    <ClCompile Include="src\BoardTiles\DwTile.cpp" />
+    <ClCompile Include="src\BoardTiles\NormalTile.cpp" />
+    <ClCompile Include="src\BoardTiles\BoardTile.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -155,16 +158,20 @@
     <Image Include="assets\brown.png" />
     <Image Include="assets\red.png" />
     <Image Include="assets\silver.png" />
+    <Image Include="assets\start.png" />
+    <Image Include="assets\tilemap.PNG" />
     <Image Include="assets\woodtiles.png" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\board\BoardTileSettings.h" />
-    <ClInclude Include="src\board\BoardTile.h" />
-    <ClInclude Include="src\board\NormalBoard.h" />
-    <ClInclude Include="src\shared\Constants.h" />
-    <ClInclude Include="src\shared\Enums.h" />
-    <ClInclude Include="src\board\GameBoard.h" />
-    <ClInclude Include="src\board\BoardLoader.h" />
+    <ClInclude Include="include\Game\GameRender.h" />
+    <ClInclude Include="include\Game\Game.h" />
+    <ClInclude Include="include\Board\BoardTileFactory.h" />
+    <ClInclude Include="include\Board\DwTile.h" />
+    <ClInclude Include="include\Board\BoardTile.h" />
+    <ClInclude Include="include\Board\NormalBoard.h" />
+    <ClInclude Include="include\Common\Constants.h" />
+    <ClInclude Include="include\Common\Enums.h" />
+    <ClInclude Include="include\Board\NormalTile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
