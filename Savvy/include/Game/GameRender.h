@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include <SFML/Graphics.hpp>
+#include "Board/BoardTile.h"
 
 class GameRender
 {
@@ -11,8 +12,9 @@ public:
 	static void Initialize();
 	static GameRender* GetInstance();
 	static size_t RegisterTexture(std::string filename);
-	static void RegisterSprite(sf::Sprite sprite, size_t id);
-	static void Draw(sf::RenderWindow& window, size_t id);
+	static void UpdateSprite(BoardTile& tile);
+	static void RegisterSprite(BoardTile& tile);
+	static void Draw(sf::RenderWindow& window);
 
 private:
 	static GameRender* _instance;

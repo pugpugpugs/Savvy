@@ -18,12 +18,6 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BoardLoader.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\GameBoard.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\BoardTiles\BoardTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -39,13 +33,10 @@
     <ClCompile Include="src\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Layout.h">
+    <ClCompile Include="include\Board\Layout.h">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\GameRender.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="TileTemplate.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -71,42 +62,36 @@
     <Image Include="assets\start.png">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="assets\tilemap.PNG">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="include\BoardLoader.h">
+    <ClInclude Include="include\Common\Enums.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\GameBoard.h">
+    <ClInclude Include="include\Board\NormalBoard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Enums.h">
+    <ClInclude Include="include\Common\Constants.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\NormalBoard.h">
+    <ClInclude Include="include\Board\BoardTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Constants.h">
+    <ClInclude Include="include\Board\NormalTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\BoardTiles\BoardTile.h">
+    <ClInclude Include="include\Board\DwTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\BoardTiles\NormalTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BoardTiles\DwTile.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="include\BoardTiles\BoardTileFactory.h">
+    <ClInclude Include="include\Board\BoardTileFactory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Game\Game.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Game\GameRender.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="TileTemplate.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

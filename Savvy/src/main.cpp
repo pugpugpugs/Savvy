@@ -1,12 +1,11 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-#include "GameBoard.h"
-#include "BoardLoader.h"
-#include "BoardTiles/NormalTile.h"
-#include "BoardTiles/DwTile.h"
-#include <BoardTiles/BoardTileFactory.h>
 #include <Game/Game.h>
 #include <Game/GameRender.h>
+#include <Board/NormalTile.h>
+#include <Board/BoardTileFactory.h>
+#include <Common/Enums.h>
+#include <Board/Layout.h>
 
 
 int main() 
@@ -22,12 +21,6 @@ int main()
 
 	game.Start();
 
-	NormalTile tile;
-	NormalTile tile2;
-
-	// add method to get texture by id from render
-	
-
 	// Load
 
 	sf::Event event;
@@ -38,6 +31,13 @@ int main()
 			switch (event.type)
 			{
 			case sf::Event::KeyPressed:
+				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+				{
+					game.boardTiles[0].release();
+					game.boardTiles[0] = BoardTileFactory::CreateBoardTile(Enums::NormalTile);
+					game.boardTiles[0]->SetPosition(Layout::OffsetX(0), Layout::OffsetY(0));
+					GameRender::UpdateSprite(*game.boardTiles[0]);
+				}
 				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
 				{
 					window.close();
@@ -49,17 +49,9 @@ int main()
 			}
 		}
 
-		window.clear(sf::Color::Red);
+		window.clear(sf::Color::Black);
 
-		//for (auto& tile : game.boardTiles)
-		//{
-		//	tile.Draw(window);
-		//}
-
-		//tile.Draw(window);
-
-		GameRender::Draw(window, tile.id);
-
+		GameRender::Draw(window);
 
 		window.display();
 	}

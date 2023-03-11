@@ -1,11 +1,11 @@
 #include "Game/Game.h"
-#include <BoardTiles/BoardTileFactory.h>
 #include <iostream>
-#include <Constants.h>
-#include <Layout.h>
 #include <Game/GameRender.h>
-#include <BoardTiles/NormalTile.h>
-#include <NormalBoard.h>
+#include <Board/NormalBoard.h>
+#include <Board/BoardTileFactory.h>
+#include <Board/Layout.h>
+#include <Board/NormalTile.h>
+#include <Board/DwTile.h>
 
 Game::Game()
 {
@@ -19,24 +19,20 @@ void Game::Start()
 void Game::CreateBoard()
 {
 	NormalBoard normalBoard;
-	BoardTileFactory factory;
 
 	int i = 0;
 	for (int y = 0; y < normalBoard.height; y++) 
 	{
 		for (int x = 0; x < normalBoard.width; x++)
 		{
-			auto t = factory.CreateBoardTile(normalBoard.standardBoardMap[i]);
+			auto t = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
 
-			boardTiles.push_back(*t);
+			boardTiles.push_back(std::move(t));
 
-			//boardTiles[i].count = i;
+			boardTiles[i]->SetPosition(Layout::OffsetX(x), Layout::OffsetY(y));
 
-			boardTiles[i].SetPosition(Layout::OffsetX(x), Layout::OffsetY(y));
-
-			GameRender::RegisterSprite(boardTiles[i].sprite, boardTiles[i].id);
+			GameRender::RegisterSprite(*boardTiles[i]);
 			i++;
-
 		}
 	}
 }
@@ -45,4 +41,5 @@ void Game::Initialize()
 {
 	GameRender::Initialize();
 	NormalTile::Initialize();
+	DwTile::Initialize();
 }
