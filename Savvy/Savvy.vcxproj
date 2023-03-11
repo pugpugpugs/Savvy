@@ -144,16 +144,13 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game\GameRender.cpp" />
-    <ClCompile Include="include\Layout.h" />
+    <ClCompile Include="include\Board\Layout.h" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\BoardTiles\BoardTileFactory.cpp" />
     <ClCompile Include="src\BoardTiles\DwTile.cpp" />
     <ClCompile Include="src\BoardTiles\NormalTile.cpp" />
     <ClCompile Include="src\BoardTiles\BoardTile.cpp" />
-    <ClCompile Include="src\GameBoard.cpp" />
-    <ClCompile Include="src\BoardLoader.cpp" />
     <ClCompile Include="src\main.cpp" />
-    <ClCompile Include="TileTemplate.cpp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="assets\darkgreen.png" />
@@ -162,21 +159,19 @@
     <Image Include="assets\red.png" />
     <Image Include="assets\silver.png" />
     <Image Include="assets\start.png" />
+    <Image Include="assets\tilemap.PNG" />
     <Image Include="assets\woodtiles.png" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game\GameRender.h" />
     <ClInclude Include="include\Game\Game.h" />
-    <ClInclude Include="include\BoardTiles\BoardTileFactory.h" />
-    <ClInclude Include="include\BoardTiles\DwTile.h" />
-    <ClInclude Include="include\BoardTiles\BoardTile.h" />
-    <ClInclude Include="include\NormalBoard.h" />
-    <ClInclude Include="include\Constants.h" />
-    <ClInclude Include="include\Enums.h" />
-    <ClInclude Include="include\GameBoard.h" />
-    <ClInclude Include="include\BoardLoader.h" />
-    <ClInclude Include="include\BoardTiles\NormalTile.h" />
-    <ClInclude Include="TileTemplate.h" />
+    <ClInclude Include="include\Board\BoardTileFactory.h" />
+    <ClInclude Include="include\Board\DwTile.h" />
+    <ClInclude Include="include\Board\BoardTile.h" />
+    <ClInclude Include="include\Board\NormalBoard.h" />
+    <ClInclude Include="include\Common\Constants.h" />
+    <ClInclude Include="include\Common\Enums.h" />
+    <ClInclude Include="include\Board\NormalTile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

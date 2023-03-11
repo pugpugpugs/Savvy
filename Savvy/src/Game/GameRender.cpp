@@ -1,6 +1,7 @@
 #include "Game/GameRender.h"
 #include <iostream>
-#include <Layout.h>
+#include <Board/Layout.h>
+#include <Board/BoardTile.h>
 
 GameRender* GameRender::_instance = nullptr;
 
@@ -39,28 +40,38 @@ size_t GameRender::RegisterTexture(std::string filename)
 	return instance._textures.size() - 1;
 }
 
-void GameRender::RegisterSprite(sf::Sprite sprite, size_t id)
+void GameRender::RegisterSprite(BoardTile& tile)
 {
 	GameRender& instance = *GetInstance();
 
-	sprite.setTexture(instance._textures[id]);
-	sprite.setTextureRect(sf::IntRect(NORMAL_TILE_START_POS_X, NORMAL_TILE_START_POS_Y, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
-	sprite.setScale(static_cast<float>(BOARD_TILE_PIXEL_SIZE / BOARD_TILE_SPRITE_SIZE), static_cast<float>(BOARD_TILE_PIXEL_SIZE / BOARD_TILE_SPRITE_SIZE));
+	tile.sprite.setTexture(instance._textures[tile.GetId()]);
+	tile.sprite.setTextureRect(sf::IntRect(tile.startX, tile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
+	tile.sprite.setScale(static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE), static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE));
 
-	instance._sprites.push_back(sprite);
+	instance._sprites.push_back(tile.sprite);
+	std::cout << "Sprite count: " << instance._sprites.size() << std::endl;
 }
 
-void GameRender::Draw(sf::RenderWindow& window, size_t id) 
+
+void GameRender::UpdateSprite(BoardTile& pTile)
 {
 	GameRender& instance = *GetInstance();
 
-	//sf::Sprite renderSprite(instance._textures[id]);
-	//renderSprite.setScale(5, 5);
-	//window.draw(renderSprite);
+	pTile.sprite.setTexture(instance._textures[pTile.GetId()]);
+	pTile.sprite.setTextureRect(sf::IntRect(pTile.startX, pTile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
+	pTile.sprite.setScale(static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE), static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE));
+
+	instance._sprites[0] = pTile.sprite;
+	std::cout << "Sprite count: " << instance._sprites.size() << std::endl;
+}
+
+void GameRender::Draw(sf::RenderWindow& window) 
+{
+	GameRender& instance = *GetInstance();
+
 
 	for (size_t i = 0; i < instance._sprites.size(); i++)
 	{
-		//instance._sprites[i].setPosition(Layout::OffsetX(i), Layout::OffsetY(i));
 		window.draw(instance._sprites[i]);
 	}
 }

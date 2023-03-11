@@ -1,22 +1,17 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "../TileTemplate.h"
 
-class BoardTile : public TileTemplate<BoardTile>
+class BoardTile
 {
 public:
-	BoardTile();
-	~BoardTile();
+	virtual ~BoardTile() { }
 	void SetPosition(float x, float y);
 	void Draw(sf::RenderWindow& window);
 	void Init(const sf::Texture& texture);
-
-	//int count = 0;
-	//static size_t id;
+	virtual int GetId() = 0;
 	sf::Sprite sprite;
-
+	int startX = 0;
+	int startY = 0;
 protected:
-	//sf::Texture* texture = new sf::Texture();
-	//int multiplier;
 	sf::Vector2f scale;
 };

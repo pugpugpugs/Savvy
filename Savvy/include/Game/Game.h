@@ -1,5 +1,5 @@
 #pragma once
-#include <BoardTiles/BoardTile.h>
+#include <Board/BoardTile.h>
 
 class Game
 {
@@ -8,7 +8,7 @@ public:
 	void Start();
 	void Initialize();
 
-	std::vector<BoardTile> boardTiles;
+	std::vector<std::unique_ptr<BoardTile>> boardTiles;
 
 private:
 	void CreateBoard();
