@@ -53,15 +53,13 @@ int main()
 				isMouseClick = true;
 				if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
 				{
-					std::cout << "Click " << std::endl;
 					mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
 					GameRender::HandleClickEvent(mousePosition, window);
 				}
 				break;
 			case sf::Event::MouseButtonReleased:
 				isMouseClick = false;
-				GameRender::activeSprite = nullptr;
-				std::cout << "Release " << std::endl;
+				GameRender::HandleReleaseEvent(mousePosition, window);
 				break;
 			default:
 				if (isMouseClick)

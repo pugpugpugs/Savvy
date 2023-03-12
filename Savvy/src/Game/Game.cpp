@@ -1,11 +1,11 @@
-#include "Game/Game.h"
 #include <iostream>
-#include <Game/GameRender.h>
-#include <Board/NormalBoard.h>
-#include <Board/BoardTileFactory.h>
-#include <Board/Layout.h>
-#include <Board/NormalTile.h>
-#include <Board/DwTile.h>
+#include "Game/Game.h"
+#include "Game/GameRender.h"
+#include "Board/NormalBoard.h"
+#include "Board/BoardTileFactory.h"
+#include "Board/Layout.h"
+#include "Board/NormalTile.h"
+#include "Board/DwTile.h"
 
 Game::Game()
 {
@@ -14,6 +14,7 @@ Game::Game()
 void Game::Start()
 {
 	CreateBoard();
+	CreateLetters();
 }
 
 void Game::CreateBoard()
@@ -37,11 +38,23 @@ void Game::CreateBoard()
 	}
 }
 
+void Game::CreateLetters()
+{
+	auto letter = std::make_unique<LetterTile>();
+
+	letter->SetPosition(Layout::LetterOffsetX(0), Layout::LetterOffsetY(0));
+
+	letterTiles.push_back(std::move(letter));
+
+	GameRender::RegisterLetterSprite(*letterTiles.back());
+}
+
 void Game::Initialize() 
 {
 	GameRender::Initialize();
 	NormalTile::Initialize();
 	DwTile::Initialize();
+	LetterTile::Initialize();
 }
 
 //void Game::HandleClickEvent(sf::Mouse& mouse, sf::RenderWindow& window)

@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Letter\LetterTile.cpp" />
     <ClCompile Include="src\Game\GameRender.cpp" />
     <ClCompile Include="include\Board\Layout.h" />
     <ClCompile Include="src\Game\Game.cpp" />
@@ -172,6 +173,7 @@
     <ClInclude Include="include\Common\Constants.h" />
     <ClInclude Include="include\Common\Enums.h" />
     <ClInclude Include="include\Board\NormalTile.h" />
+    <ClInclude Include="include\Letter\LetterTile.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

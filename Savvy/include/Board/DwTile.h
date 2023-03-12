@@ -8,7 +8,7 @@ public:
 	DwTile();
 	~DwTile();
 	static void Initialize();
-	int GetId();
+	const int GetId();
 private:
 	inline static int tileId { -1 };
 };
