@@ -43,3 +43,8 @@ void Game::Initialize()
 	NormalTile::Initialize();
 	DwTile::Initialize();
 }
+
+//void Game::HandleClickEvent(sf::Mouse& mouse, sf::RenderWindow& window)
+//{
+//	GameRender::HandleClickEvent(mouse, window);
+//}

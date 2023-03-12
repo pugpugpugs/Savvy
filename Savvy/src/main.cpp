@@ -24,6 +24,9 @@ int main()
 	// Load
 
 	sf::Event event;
+	sf::Vector2f mousePosition;
+	bool isMouseClick = false;
+
 	while (window.isOpen())
 	{
 		while (window.pollEvent(event))
@@ -45,6 +48,26 @@ int main()
 				break;
 			case sf::Event::Closed:
 				window.close();
+				break;
+			case sf::Event::MouseButtonPressed:
+				isMouseClick = true;
+				if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+				{
+					std::cout << "Click " << std::endl;
+					mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
+					GameRender::HandleClickEvent(mousePosition, window);
+				}
+				break;
+			case sf::Event::MouseButtonReleased:
+				isMouseClick = false;
+				GameRender::activeSprite = nullptr;
+				std::cout << "Release " << std::endl;
+				break;
+			default:
+				if (isMouseClick)
+				{
+					GameRender::HandleClickEvent(mousePosition, window);
+				}
 				break;
 			}
 		}

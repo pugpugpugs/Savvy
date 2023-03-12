@@ -4,6 +4,10 @@
 #include <Board/BoardTile.h>
 
 GameRender* GameRender::_instance = nullptr;
+sf::Sprite* GameRender::activeSprite = nullptr;
+sf::Vector2f GameRender::tileScale = sf::Vector2f(static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE), 
+											      static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE));
+sf::Vector2f GameRender::scaledAmount = sf::Vector2f(BOARD_TILE_SPRITE_SIZE * tileScale.x, BOARD_TILE_SPRITE_SIZE * tileScale.y);
 
 GameRender::GameRender()
 {
@@ -44,34 +48,62 @@ void GameRender::RegisterSprite(BoardTile& tile)
 {
 	GameRender& instance = *GetInstance();
 
-	tile.sprite.setTexture(instance._textures[tile.GetId()]);
-	tile.sprite.setTextureRect(sf::IntRect(tile.startX, tile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
-	tile.sprite.setScale(static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE), static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE));
+	GameRender::SetTileDisplay(tile, instance);
 
 	instance._sprites.push_back(tile.sprite);
-	std::cout << "Sprite count: " << instance._sprites.size() << std::endl;
 }
 
 
-void GameRender::UpdateSprite(BoardTile& pTile)
+void GameRender::UpdateSprite(BoardTile& tile)
 {
 	GameRender& instance = *GetInstance();
 
-	pTile.sprite.setTexture(instance._textures[pTile.GetId()]);
-	pTile.sprite.setTextureRect(sf::IntRect(pTile.startX, pTile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
-	pTile.sprite.setScale(static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE), static_cast<float>(BOARD_TILE_SCALE_SIZE / BOARD_TILE_SPRITE_SIZE));
+	GameRender::SetTileDisplay(tile, instance);
 
-	instance._sprites[0] = pTile.sprite;
-	std::cout << "Sprite count: " << instance._sprites.size() << std::endl;
+	instance._sprites[0] = tile.sprite;
+}
+
+void GameRender::SetTileDisplay(BoardTile& tile, GameRender& instance)
+{
+	tile.sprite.setTexture(instance._textures[tile.GetId()]);
+	tile.sprite.setTextureRect(sf::IntRect(tile.startX, tile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
+	tile.sprite.setScale(tileScale.x, tileScale.y);
 }
 
 void GameRender::Draw(sf::RenderWindow& window) 
 {
 	GameRender& instance = *GetInstance();
 
-
 	for (size_t i = 0; i < instance._sprites.size(); i++)
 	{
 		window.draw(instance._sprites[i]);
+	}
+}
+
+void GameRender::HandleClickEvent(sf::Vector2f initialMousePosition, sf::RenderWindow& window)
+{
+	GameRender& instance = *GetInstance();
+	sf::Mouse mouse;
+	sf::Vector2f currentMousePosition = sf::Vector2f(mouse.getPosition(window));
+
+	if (GameRender::activeSprite != nullptr)
+	{
+		currentMousePosition = sf::Vector2f(mouse.getPosition(window));
+		activeSprite->setPosition(currentMousePosition);
+	}
+	else
+	{
+		for (auto& sprite : instance._sprites)
+		{
+			const sf::Vector2f& spritePosition = sprite.getPosition();
+
+			if (spritePosition.x <= initialMousePosition.x
+				&& initialMousePosition.x <= spritePosition.x + scaledAmount.x
+				&& spritePosition.y <= initialMousePosition.y
+				&& initialMousePosition.y <= spritePosition.y + scaledAmount.y)
+			{
+				GameRender::activeSprite = &sprite;
+			}
+		}
 	}
 }
