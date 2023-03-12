@@ -28,7 +28,8 @@ private:
 	static GameRender* _instance;
 	std::vector<sf::Sprite> _sprites;
 	std::vector<sf::Texture> _textures;
-	std::vector<sf::Sprite> _letterSprites;	
+	std::vector<sf::Sprite> _letterSprites;
+	static inline sf::Vector2f initialLetterPosition{ 0, 0 };
 
 	static void SetTileDisplay(BoardTile& tile, GameRender& instance);
 	static void SetLetterTileDisplay(BoardTile& tile, GameRender& instance);

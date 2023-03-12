@@ -128,6 +128,7 @@ void GameRender::HandleClickEvent(sf::Vector2f& initialMousePosition, sf::Render
 				&& initialMousePosition.y <= spritePosition.y + scaledAmount.y)
 			{
 				GameRender::activeSprite = &sprite;
+				GameRender::initialLetterPosition = sprite.getPosition();
 			}
 		}
 	}
@@ -175,7 +176,7 @@ void GameRender::HandleReleaseEvent(sf::Vector2f& initialMousePosition, sf::Rend
 
 	if (!isValidMove)
 	{
-		GameRender::activeSprite->setPosition(0, 0);
+		GameRender::activeSprite->setPosition(GameRender::initialLetterPosition);
 	}
 
 	GameRender::activeSprite = nullptr;
