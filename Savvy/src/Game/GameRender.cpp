@@ -80,16 +80,16 @@ void GameRender::Draw(sf::RenderWindow& window)
 	}
 }
 
-void GameRender::HandleClickEvent(sf::Vector2f initialMousePosition, sf::RenderWindow& window)
+void GameRender::HandleClickEvent(sf::Vector2f& initialMousePosition, sf::RenderWindow& window)
 {
 	GameRender& instance = *GetInstance();
-	sf::Mouse mouse;
-	sf::Vector2f currentMousePosition = sf::Vector2f(mouse.getPosition(window));
 
 	if (GameRender::activeSprite != nullptr)
 	{
-		currentMousePosition = sf::Vector2f(mouse.getPosition(window));
-		activeSprite->setPosition(currentMousePosition);
+		sf::Vector2f positionChange = sf::Vector2f(sf::Mouse::getPosition(window)) - initialMousePosition;
+		initialMousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
+		sf::Vector2f newPosition = activeSprite->getPosition() + positionChange;
+		activeSprite->setPosition(newPosition);
 	}
 	else
 	{
