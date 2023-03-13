@@ -143,6 +143,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Event\EventHandler.cpp" />
     <ClCompile Include="src\Letter\LetterTile.cpp" />
     <ClCompile Include="src\Game\GameRender.cpp" />
     <ClCompile Include="include\Board\Layout.h" />
@@ -164,6 +165,7 @@
     <Image Include="assets\woodtiles.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Event\EventHandler.h" />
     <ClInclude Include="include\Game\GameRender.h" />
     <ClInclude Include="include\Game\Game.h" />
     <ClInclude Include="include\Board\BoardTileFactory.h" />

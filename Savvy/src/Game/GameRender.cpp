@@ -105,16 +105,18 @@ void GameRender::Draw(sf::RenderWindow& window)
 	}
 }
 
-void GameRender::HandleClickEvent(sf::Vector2f& initialMousePosition, sf::RenderWindow& window)
+void GameRender::DragSprite(sf::Vector2f& initialMousePosition, const sf::RenderWindow& window)
 {
 	GameRender& instance = *GetInstance();
 
 	if (GameRender::activeSprite != nullptr)
 	{
+		//std::cout << "initial position " << initialMousePosition.x << "," << initialMousePosition.y << std::endl;
 		sf::Vector2f positionChange = sf::Vector2f(sf::Mouse::getPosition(window)) - initialMousePosition;
 		initialMousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
 		sf::Vector2f newPosition = activeSprite->getPosition() + positionChange;
 		activeSprite->setPosition(newPosition);
+		//std::cout << "active position " << activeSprite->getPosition().x << "," << activeSprite->getPosition().y << std::endl;
 	}
 	else
 	{
@@ -134,11 +136,10 @@ void GameRender::HandleClickEvent(sf::Vector2f& initialMousePosition, sf::Render
 	}
 }
 
-void GameRender::HandleReleaseEvent(sf::Vector2f& initialMousePosition, sf::RenderWindow& window)
+void GameRender::DropSprite(sf::Vector2f& initialMousePosition, const sf::RenderWindow& window)
 {
 	if (GameRender::activeSprite == nullptr)
 	{
-		std::cout << "NULLPTR Active sprite" << std::endl;
 		return;
 	}
 
@@ -152,22 +153,22 @@ void GameRender::HandleReleaseEvent(sf::Vector2f& initialMousePosition, sf::Rend
 
 	sf::Vector2f activeSpriteCenter(activeSprite->getPosition().x + (centerX / 2), activeSprite->getPosition().y + (centerY / 2));
 	
-	std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
+	//std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
 
 	for (auto& sprite : instance._sprites)
 	{
 		const sf::Vector2f& spritePosition = sprite.getPosition();
 
-		std::cout << "sprite pos: (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
-		std::cout << "scale amt : (" << letterScaledAmount.x << ", " << letterScaledAmount.y << ")" << std::endl;
+		//std::cout << "sprite pos: (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
+		//std::cout << "scale amt : (" << letterScaledAmount.x << ", " << letterScaledAmount.y << ")" << std::endl;
 
 		if (activeSpriteCenter.x >= sprite.getPosition().x
 			&& sprite.getPosition().x + letterScaledAmount.x >= activeSpriteCenter.x
 			&& activeSpriteCenter.y  >= sprite.getPosition().y
 			&& sprite.getPosition().y + letterScaledAmount.y >= activeSpriteCenter.y )
 		{
-			std::cout << "valid sprite pos: (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
-			std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
+			//std::cout << "valid sprite pos: (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
+			//std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
 			GameRender::activeSprite->setPosition(sprite.getPosition());
 			isValidMove = true;
 			break;
