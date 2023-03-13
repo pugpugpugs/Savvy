@@ -111,12 +111,12 @@ void GameRender::DragSprite(sf::Vector2f& initialMousePosition, const sf::Render
 
 	if (GameRender::activeSprite != nullptr)
 	{
-		//std::cout << "initial position " << initialMousePosition.x << "," << initialMousePosition.y << std::endl;
+		std::cout << "initial position " << initialMousePosition.x << "," << initialMousePosition.y << std::endl;
 		sf::Vector2f positionChange = sf::Vector2f(sf::Mouse::getPosition(window)) - initialMousePosition;
 		initialMousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
 		sf::Vector2f newPosition = activeSprite->getPosition() + positionChange;
 		activeSprite->setPosition(newPosition);
-		//std::cout << "active position " << activeSprite->getPosition().x << "," << activeSprite->getPosition().y << std::endl;
+		std::cout << "active position " << activeSprite->getPosition().x << "," << activeSprite->getPosition().y << std::endl;
 	}
 	else
 	{
@@ -153,7 +153,7 @@ void GameRender::DropSprite(sf::Vector2f& initialMousePosition, const sf::Render
 
 	sf::Vector2f activeSpriteCenter(activeSprite->getPosition().x + (centerX / 2), activeSprite->getPosition().y + (centerY / 2));
 	
-	//std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
+	std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
 
 	for (auto& sprite : instance._sprites)
 	{

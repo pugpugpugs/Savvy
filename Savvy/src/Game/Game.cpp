@@ -6,15 +6,58 @@
 #include "Board/Layout.h"
 #include "Board/NormalTile.h"
 #include "Board/DwTile.h"
+#include "Event/EventHandler.h"
+#include "State/MainMenuState.h"
+#include "State/PlayState.h"
 
 Game::Game()
 {
+	sf::ContextSettings settings;
+	settings.antialiasingLevel = 8;
+	window.create(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
+	window.setFramerateLimit(60);
+	PushState(new PlayState(this));
 }
 
 void Game::Start()
 {
-	CreateBoard();
-	CreateLetters();
+	sf::Clock clock;
+
+	sf::Event event;
+	EventHandler handler;
+
+	while (window.isOpen())
+	{
+		float elapsedSeconds = clock.restart().asSeconds();
+
+		if (CurrentState() == nullptr)
+		{
+			std::cout << "Null ptr state" << std::endl;
+			continue;
+		}
+
+		CurrentState()->Handle();
+
+		CurrentState()->Update(elapsedSeconds);
+
+
+		//while (window.pollEvent(event))
+		//{
+		//	handler.HandleEvent(event, window);
+		//}
+
+		//window.clear(sf::Color::Black);
+
+		//GameRender::Draw(window);
+
+		//window.display();
+
+		window.clear(sf::Color::Black);
+
+		CurrentState()->Draw(elapsedSeconds);
+
+		window.display();
+	}
 }
 
 void Game::CreateBoard()
@@ -28,11 +71,11 @@ void Game::CreateBoard()
 		{
 			auto t = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
 
-			boardTiles.push_back(std::move(t));
+			BoardTiles.push_back(std::move(t));
 
-			boardTiles[i]->SetPosition(Layout::OffsetX(x), Layout::OffsetY(y));
+			BoardTiles[i]->SetPosition(Layout::OffsetX(x), Layout::OffsetY(y));
 
-			GameRender::RegisterSprite(*boardTiles[i]);
+			GameRender::RegisterSprite(*BoardTiles[i]);
 			i++;
 		}
 	}
@@ -44,9 +87,9 @@ void Game::CreateLetters()
 
 	letter->SetPosition(Layout::LetterOffsetX(0), Layout::LetterOffsetY(0));
 
-	letterTiles.push_back(std::move(letter));
+	LetterTiles.push_back(std::move(letter));
 
-	GameRender::RegisterLetterSprite(*letterTiles.back());
+	GameRender::RegisterLetterSprite(*LetterTiles.back());
 }
 
 void Game::Initialize() 
@@ -55,6 +98,30 @@ void Game::Initialize()
 	NormalTile::Initialize();
 	DwTile::Initialize();
 	LetterTile::Initialize();
+
+	CreateBoard();
+	CreateLetters();
+}
+
+void Game::PushState(GameState* state)
+{
+	_states.push_back(state);
+}
+
+void Game::PopState()
+{
+	_states.back();
+	delete _states.back();
+	_states.pop_back();
+}
+
+GameState* Game::CurrentState()
+{
+	if (_states.empty())
+	{
+		return nullptr;
+	}
+	return _states.back();
 }
 
 //void Game::HandleClickEvent(sf::Mouse& mouse, sf::RenderWindow& window)

@@ -143,6 +143,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\State\PlayState.cpp" />
+    <ClCompile Include="src\State\MainMenuState.cpp" />
+    <ClCompile Include="src\State\GameState.cpp" />
     <ClCompile Include="src\Event\EventHandler.cpp" />
     <ClCompile Include="src\Letter\LetterTile.cpp" />
     <ClCompile Include="src\Game\GameRender.cpp" />
@@ -165,6 +168,7 @@
     <Image Include="assets\woodtiles.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\State\GameState.h" />
     <ClInclude Include="include\Event\EventHandler.h" />
     <ClInclude Include="include\Game\GameRender.h" />
     <ClInclude Include="include\Game\Game.h" />
@@ -176,6 +180,8 @@
     <ClInclude Include="include\Common\Enums.h" />
     <ClInclude Include="include\Board\NormalTile.h" />
     <ClInclude Include="include\Letter\LetterTile.h" />
+    <ClInclude Include="include\State\MainMenuState.h" />
+    <ClInclude Include="include\State\PlayState.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

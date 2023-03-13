@@ -51,7 +51,7 @@ bool EventHandler::MouseClickEvent(const sf::Event& event, const sf::RenderWindo
 		{
 			MouseEvents.IsLeftClicked = true;
 			MouseEvents.MouseLeftClickCoords = sf::Vector2f(sf::Mouse::getPosition(window));
-			//std::cout << "Left Clcik " << MouseEvents.IsLeftClicked << " move " << MouseEvents.MouseCoords.x << "," << MouseEvents.MouseCoords.y << std::endl;
+			std::cout << "Left Clcik " << MouseEvents.IsLeftClicked << " move " << MouseEvents.MouseCoords.x << "," << MouseEvents.MouseCoords.y << std::endl;
 			MouseEvents.MouseCoords = sf::Vector2f(sf::Mouse::getPosition(window));
 			//_isLeftClicked = true;
 			//_mouseLeftClickCoords = sf::Vector2f(sf::Mouse::getPosition(window));
@@ -70,8 +70,8 @@ bool EventHandler::MouseReleaseEvent(const sf::Event& event, const sf::RenderWin
 		{
 			MouseEvents.IsLeftClicked = false;
 			MouseEvents.IsReleased = true;
-			//std::cout << "Left Clcik Up" << MouseEvents.IsLeftClicked << std::endl;
-			//std::cout << "Left Clcik Release" << MouseEvents.IsReleased << std::endl;
+			std::cout << "Left Clcik Up" << MouseEvents.IsLeftClicked << std::endl;
+			std::cout << "Left Clcik Release" << MouseEvents.IsReleased << std::endl;
 			MouseEvents.MouseCoords = sf::Vector2f(sf::Mouse::getPosition(window));
 			//_isLeftClicked = false;
 			GameRender::DropSprite(MouseEvents.MouseCoords, window);
@@ -86,7 +86,7 @@ bool EventHandler::MouseMoveEvent(const sf::Event& event, const sf::RenderWindow
 {
 	if (event.type == sf::Event::MouseMoved)
 	{
-		//std::cout << "Left: " << MouseEvents.IsLeftClicked << " Move " << MouseEvents.MouseCoords.x << " " << MouseEvents.MouseCoords.y << std::endl;
+		std::cout << "Left: " << MouseEvents.IsLeftClicked << " Move " << MouseEvents.MouseCoords.x << " " << MouseEvents.MouseCoords.y << std::endl;
 		MouseEvents.MouseCoords = sf::Vector2f(sf::Mouse::getPosition(window));
 
 		if (MouseEvents.IsLeftClicked)
