@@ -16,8 +16,8 @@ public:
 	static void RegisterSprite(BoardTile& tile);
 	static void RegisterLetterSprite(BoardTile& tile);
 	static void Draw(sf::RenderWindow& window);
-	static void HandleClickEvent(sf::Vector2f& mousePosition, sf::RenderWindow& window);
-	static void HandleReleaseEvent(sf::Vector2f& initialMousePosition, sf::RenderWindow& window);
+	static void DragSprite(sf::Vector2f& mousePosition, const sf::RenderWindow& window);
+	static void DropSprite(sf::Vector2f& initialMousePosition, const sf::RenderWindow& window);
 	static sf::Vector2f tileScale;
 	static sf::Vector2f letterTileScale;
 	static sf::Vector2f scaledAmount;
