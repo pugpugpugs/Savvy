@@ -13,9 +13,9 @@ void BoardTile::Draw(sf::RenderWindow& window)
 }
 
 
-void BoardTile::Init(const sf::Texture& texture)
-{
-	sprite.setTexture(texture);
-	sprite.setTextureRect(sf::IntRect(NORMAL_TILE_START_POS_X, NORMAL_TILE_START_POS_Y, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
-	sprite.setScale(scale);
-}
+//void BoardTile::Init(const sf::Texture& texture)
+//{
+//	sprite.setTexture(texture);
+//	sprite.setTextureRect(sf::IntRect(NORMAL_TILE_START_POS_X, NORMAL_TILE_START_POS_Y, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
+//	sprite.setScale(scale);
+//}

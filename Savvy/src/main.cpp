@@ -6,6 +6,7 @@
 #include <Board/BoardTileFactory.h>
 #include <Common/Enums.h>
 #include <Board/Layout.h>
+#include <Event/EventHandler.h>
 
 
 int main() 
@@ -21,32 +22,62 @@ int main()
 
 	game.Start();
 
-	// Load
-
 	sf::Event event;
+	EventHandler handler;
+	sf::Vector2f mousePosition;
+	bool isMouseClick = false;
+
 	while (window.isOpen())
 	{
 		while (window.pollEvent(event))
 		{
-			switch (event.type)
-			{
-			case sf::Event::KeyPressed:
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
-				{
-					game.boardTiles[0].release();
-					game.boardTiles[0] = BoardTileFactory::CreateBoardTile(Enums::NormalTile);
-					game.boardTiles[0]->SetPosition(Layout::OffsetX(0), Layout::OffsetY(0));
-					GameRender::UpdateSprite(*game.boardTiles[0]);
-				}
-				if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
-				{
-					window.close();
-				}
-				break;
-			case sf::Event::Closed:
-				window.close();
-				break;
-			}
+			handler.HandleEvent(event, window);
+
+			//if (handler.MouseEvents.IsLeftClicked)
+			//{
+			//	GameRender::HandleClickEvent(handler.MouseEvents.MouseLeftClickCoords, window);
+			//}
+			//else if (handler.MouseEvents.IsReleased)
+			//{
+			//	GameRender::HandleReleaseEvent(handler.MouseEvents.MouseCoords, window);
+			//}
+			//switch (event.type)
+			//{
+			//case sf::Event::KeyPressed:
+			//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::A))
+			//	{
+			//		game.boardTiles[0].release();
+			//		game.boardTiles[0] = BoardTileFactory::CreateBoardTile(Enums::NormalTile);
+			//		game.boardTiles[0]->SetPosition(Layout::OffsetX(0), Layout::OffsetY(0));
+			//		GameRender::UpdateSprite(*game.boardTiles[0]);
+			//	}
+			//	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Escape))
+			//	{
+			//		window.close();
+			//	}
+			//	break;
+			//case sf::Event::Closed:
+			//	window.close();
+			//	break;
+			//case sf::Event::MouseButtonPressed:
+			//	isMouseClick = true;
+			//	if (sf::Mouse::isButtonPressed(sf::Mouse::Button::Left))
+			//	{
+			//		mousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
+			//		GameRender::HandleClickEvent(mousePosition, window);
+			//	}
+			//	break;
+			//case sf::Event::MouseButtonReleased:
+			//	isMouseClick = false;
+			//	GameRender::HandleReleaseEvent(mousePosition, window);
+			//	break;
+			//default:
+			//	if (isMouseClick)
+			//	{
+			//		GameRender::HandleClickEvent(mousePosition, window);
+			//	}
+			//	break;
+			//}
 		}
 
 		window.clear(sf::Color::Black);

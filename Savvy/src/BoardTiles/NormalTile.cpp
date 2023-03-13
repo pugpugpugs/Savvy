@@ -18,7 +18,7 @@ void NormalTile::Initialize()
 	tileId = GameRender::RegisterTexture(NORMAL_TILE_FILEPATH);
 }
 
-int NormalTile::GetId() 
+const int NormalTile::GetId() 
 {
 	return tileId;
 }

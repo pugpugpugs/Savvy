@@ -18,7 +18,7 @@ void DwTile::Initialize()
 	tileId = GameRender::RegisterTexture(DW_TILE_FILEPATH);
 }
 
-int DwTile::GetId() 
+const int DwTile::GetId() 
 {
 	return tileId;
 }
