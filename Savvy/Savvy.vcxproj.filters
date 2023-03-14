@@ -18,16 +18,16 @@
     <ClCompile Include="src\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BoardTiles\BoardTile.cpp">
+    <ClCompile Include="src\Board\BoardTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BoardTiles\NormalTile.cpp">
+    <ClCompile Include="src\Board\NormalTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BoardTiles\DwTile.cpp">
+    <ClCompile Include="src\Board\DwTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\BoardTiles\BoardTileFactory.cpp">
+    <ClCompile Include="src\Board\BoardTileFactory.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Game.cpp">
@@ -39,7 +39,7 @@
     <ClCompile Include="src\Game\GameRender.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Letter\LetterTile.cpp">
+    <ClCompile Include="src\Board\LetterTile.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Event\EventHandler.cpp">
@@ -52,6 +52,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\State\PlayState.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Board\TwTile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Board\TileRack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -109,7 +115,7 @@
     <ClInclude Include="include\Game\GameRender.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Letter\LetterTile.h">
+    <ClInclude Include="include\Board\LetterTile.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Event\EventHandler.h">
@@ -122,6 +128,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\State\PlayState.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board\TwTile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Board\TileRack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

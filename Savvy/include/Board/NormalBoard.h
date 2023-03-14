@@ -4,11 +4,11 @@
 struct NormalBoard
 {
 	const Enums::BoardTileType standardBoardMap[25] = {
-		Enums::BoardTileType::DWTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile,
+		Enums::BoardTileType::TWTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::TWTile,
 		Enums::BoardTileType::NormalTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile,
-		Enums::BoardTileType::NormalTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile,
+		Enums::BoardTileType::DWTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile,
 		Enums::BoardTileType::NormalTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile,
-		Enums::BoardTileType::DWTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile
+		Enums::BoardTileType::TWTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::TWTile
 
 		//Enums::BoardTileType::TWTile,  Enums::BoardTileType::NormalTile, Enums::BoardTileType::DWTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::TWTile,
 		//Enums::BoardTileType::NormalTile,  Enums::BoardTileType::DLTile, Enums::BoardTileType::NormalTile, Enums::BoardTileType::DLTile, Enums::BoardTileType::NormalTile,

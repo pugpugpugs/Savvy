@@ -1,6 +1,6 @@
 #pragma once
 #include <Board/BoardTile.h>
-#include <Letter/LetterTile.h>
+#include <Board/LetterTile.h>
 
 class GameState;
 
@@ -17,7 +17,6 @@ public:
 	void PushState(GameState* state);
 	void PopState();
 	GameState* CurrentState();
-	//void HandleClickEvent(sf::Mouse& mouse, sf::RenderWindow& window);
 
 private:
 	std::vector<GameState*> _states;
