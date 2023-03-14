@@ -1,4 +1,4 @@
-#include "Letter/LetterTile.h"
+#include "Board/LetterTile.h"
 #include <Common/Constants.h>
 #include <Game/GameRender.h>
 

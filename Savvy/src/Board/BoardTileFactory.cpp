@@ -3,6 +3,7 @@
 #include "Common/Enums.h"
 #include <iostream>
 #include <Board/DwTile.h>
+#include <Board/TwTile.h>
 
 std::unique_ptr<BoardTile> BoardTileFactory::CreateBoardTile(Enums::BoardTileType type)
 {
@@ -14,6 +15,7 @@ std::unique_ptr<BoardTile> BoardTileFactory::CreateBoardTile(Enums::BoardTileTyp
 	case Enums::DWTile:
 		return std::make_unique<DwTile>();
 	case Enums::TWTile:
+		return std::make_unique<TwTile>();
 	case Enums::DLTile:
 	case Enums::TLTile:
 	default:

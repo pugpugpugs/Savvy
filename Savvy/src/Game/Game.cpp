@@ -9,6 +9,9 @@
 #include "Event/EventHandler.h"
 #include "State/MainMenuState.h"
 #include "State/PlayState.h"
+#include <Board/TwTile.h>
+#include <Board/TileRack.h>
+
 
 Game::Game()
 {
@@ -40,18 +43,6 @@ void Game::Start()
 
 		CurrentState()->Update(elapsedSeconds);
 
-
-		//while (window.pollEvent(event))
-		//{
-		//	handler.HandleEvent(event, window);
-		//}
-
-		//window.clear(sf::Color::Black);
-
-		//GameRender::Draw(window);
-
-		//window.display();
-
 		window.clear(sf::Color::Black);
 
 		CurrentState()->Draw(elapsedSeconds);
@@ -69,9 +60,9 @@ void Game::CreateBoard()
 	{
 		for (int x = 0; x < normalBoard.width; x++)
 		{
-			auto t = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
+			auto pBoardTile = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
 
-			BoardTiles.push_back(std::move(t));
+			BoardTiles.push_back(std::move(pBoardTile));
 
 			BoardTiles[i]->SetPosition(Layout::OffsetX(x), Layout::OffsetY(y));
 
@@ -85,7 +76,8 @@ void Game::CreateLetters()
 {
 	auto letter = std::make_unique<LetterTile>();
 
-	letter->SetPosition(Layout::LetterOffsetX(0), Layout::LetterOffsetY(0));
+	//letter->SetPosition(Layout::OffsetX(0), Layout::OffsetY(600));
+	letter->SetPosition(0, 650);
 
 	LetterTiles.push_back(std::move(letter));
 
@@ -97,7 +89,9 @@ void Game::Initialize()
 	GameRender::Initialize();
 	NormalTile::Initialize();
 	DwTile::Initialize();
+	TwTile::Initialize();
 	LetterTile::Initialize();
+	TileRack::Initialize();
 
 	CreateBoard();
 	CreateLetters();
@@ -123,8 +117,3 @@ GameState* Game::CurrentState()
 	}
 	return _states.back();
 }
-
-//void Game::HandleClickEvent(sf::Mouse& mouse, sf::RenderWindow& window)
-//{
-//	GameRender::HandleClickEvent(mouse, window);
-//}
