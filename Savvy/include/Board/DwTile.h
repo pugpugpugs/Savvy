@@ -1,14 +1,9 @@
 #pragma once
-#include "Board/BoardTile.h"
+#include "Board/Tile.h"
 
-class DwTile : public BoardTile
+class DwTile : public Tile
 {
 public:
 	DwTile();
-	~DwTile();
-	static void Initialize();
-	const int GetId();
-private:
-	inline static int _tileId { -1 };
 };
 

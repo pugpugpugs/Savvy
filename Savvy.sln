@@ -5,6 +5,8 @@ VisualStudioVersion = 17.2.32526.322
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Savvy", "Savvy\Savvy.vcxproj", "{50309123-8DE0-4DA4-960F-B4F3705768EA}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Savvy.Game", "Savvy.Game\Savvy.Game.vcxproj", "{2B7660A3-5A08-4721-AB56-DD122B48643B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{50309123-8DE0-4DA4-960F-B4F3705768EA}.Release|x64.Build.0 = Release|x64
 		{50309123-8DE0-4DA4-960F-B4F3705768EA}.Release|x86.ActiveCfg = Release|Win32
 		{50309123-8DE0-4DA4-960F-B4F3705768EA}.Release|x86.Build.0 = Release|Win32
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Debug|x64.ActiveCfg = Debug|x64
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Debug|x64.Build.0 = Debug|x64
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Debug|x86.ActiveCfg = Debug|Win32
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Debug|x86.Build.0 = Debug|Win32
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Release|x64.ActiveCfg = Release|x64
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Release|x64.Build.0 = Release|x64
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Release|x86.ActiveCfg = Release|Win32
+		{2B7660A3-5A08-4721-AB56-DD122B48643B}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

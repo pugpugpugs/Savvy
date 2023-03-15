@@ -67,10 +67,9 @@ bool EventHandler::MouseReleaseEvent(const sf::Event& event, const sf::RenderWin
 		{
 			MouseEvents.IsLeftClicked = false;
 			MouseEvents.IsReleased = true;
-			//std::cout << "Left Clcik Up" << MouseEvents.IsLeftClicked << std::endl;
 			//std::cout << "Left Clcik Release" << MouseEvents.IsReleased << std::endl;
 			MouseEvents.MouseCoords = sf::Vector2f(sf::Mouse::getPosition(window));
-			GameRender::DropSprite(MouseEvents.MouseCoords, window);
+			GameRender::DropSprite();
 		}
 		return true;
 	}

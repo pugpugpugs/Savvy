@@ -9,6 +9,7 @@ namespace Enums
 		DWTile,
 		TWTile,
 		DLTile,
-		TLTile
+		TLTile,
+		LetterTile
 	};
 }

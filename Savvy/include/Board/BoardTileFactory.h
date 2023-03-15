@@ -1,11 +1,11 @@
 #pragma once
-#include <Board/BoardTile.h>
+#include <Board/Tile.h>
 #include <Common/Enums.h>
 
 class BoardTileFactory
 {
 public:
-	static std::unique_ptr<BoardTile> CreateBoardTile(Enums::BoardTileType type);
+	static std::unique_ptr<Drawable> CreateBoardTile(Enums::BoardTileType type);
 	BoardTileFactory();
 	~BoardTileFactory();
 };

@@ -6,28 +6,30 @@
 #include "Board/Layout.h"
 #include "Board/NormalTile.h"
 #include "Board/DwTile.h"
-#include "Event/EventHandler.h"
 #include "State/MainMenuState.h"
 #include "State/PlayState.h"
 #include <Board/TwTile.h>
 #include <Board/TileRack.h>
 
-
 Game::Game()
+{
+	CreateWindow();
+	Initialize();
+}
+
+void Game::CreateWindow()
 {
 	sf::ContextSettings settings;
 	settings.antialiasingLevel = 8;
 	window.create(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
 	window.setFramerateLimit(60);
-	PushState(new PlayState(this));
 }
 
 void Game::Start()
 {
 	sf::Clock clock;
 
-	sf::Event event;
-	EventHandler handler;
+	PushState(new PlayState(this));
 
 	while (window.isOpen())
 	{
@@ -35,8 +37,7 @@ void Game::Start()
 
 		if (CurrentState() == nullptr)
 		{
-			std::cout << "Null ptr state" << std::endl;
-			continue;
+			throw std::invalid_argument("Current state cannot be null.");
 		}
 
 		CurrentState()->Handle();
@@ -56,17 +57,15 @@ void Game::CreateBoard()
 	NormalBoard normalBoard;
 
 	int i = 0;
-	for (int y = 0; y < normalBoard.height; y++) 
+	for (int y = 0; y < normalBoard.height; y++)
 	{
 		for (int x = 0; x < normalBoard.width; x++)
 		{
-			auto pBoardTile = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
+			std::unique_ptr<Drawable> object = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
 
-			BoardTiles.push_back(std::move(pBoardTile));
+			object->SetPosition(Layout::Offset(x, y));
 
-			BoardTiles[i]->SetPosition(Layout::OffsetX(x), Layout::OffsetY(y));
-
-			GameRender::RegisterSprite(*BoardTiles[i]);
+			GameRender::RegisterSprite(std::move(object));
 			i++;
 		}
 	}
@@ -74,23 +73,25 @@ void Game::CreateBoard()
 
 void Game::CreateLetters()
 {
-	auto letter = std::make_unique<LetterTile>();
+	TileRack rack;
 
-	//letter->SetPosition(Layout::OffsetX(0), Layout::OffsetY(600));
-	letter->SetPosition(0, 650);
+	for (int i = 0; i < 4; i++)
+	{
+		auto letter = BoardTileFactory::CreateBoardTile(Enums::LetterTile);
 
-	LetterTiles.push_back(std::move(letter));
+		sf::Vector2f position = rack.rackPositions[i]->Rectangle.getPosition();
 
-	GameRender::RegisterLetterSprite(*LetterTiles.back());
+		letter->SetPosition(position);
+
+		GameRender::RegisterSprite(std::move(letter));
+		i++;
+	}
 }
 
-void Game::Initialize() 
+void Game::Initialize()
 {
 	GameRender::Initialize();
-	NormalTile::Initialize();
-	DwTile::Initialize();
-	TwTile::Initialize();
-	LetterTile::Initialize();
+	Tile::Initialize();
 	TileRack::Initialize();
 
 	CreateBoard();
@@ -104,7 +105,6 @@ void Game::PushState(GameState* state)
 
 void Game::PopState()
 {
-	_states.back();
 	delete _states.back();
 	_states.pop_back();
 }

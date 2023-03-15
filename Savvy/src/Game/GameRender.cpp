@@ -1,16 +1,10 @@
-#include "Game/GameRender.h"
 #include <iostream>
+#include "Game/GameRender.h"
 #include <Board/Layout.h>
-#include <Board/BoardTile.h>
+#include <Board/Tile.h>
 
 GameRender* GameRender::_instance = nullptr;
 sf::Sprite* GameRender::activeSprite = nullptr;
-sf::Vector2f GameRender::tileScale = sf::Vector2f(static_cast<float>(BOARD_TILE_SCALE_SIZE) / static_cast<float>(BOARD_TILE_SPRITE_SIZE),
-	static_cast<float>(BOARD_TILE_SCALE_SIZE) / static_cast<float>(BOARD_TILE_SPRITE_SIZE));
-//sf::Vector2f GameRender::letterTileScale = sf::Vector2f(static_cast<float>(BOARD_TILE_SCALE_SIZE) / static_cast<float>(ORIG_BOARD_TILE_WIDTH),
-//														static_cast<float>(BOARD_TILE_SCALE_SIZE) / static_cast<float>(ORIG_BOARD_TILE_HEIGHT));
-sf::Vector2f GameRender::scaledAmount = sf::Vector2f(BOARD_TILE_SPRITE_SIZE * tileScale.x, BOARD_TILE_SPRITE_SIZE * tileScale.y);
-//sf::Vector2f GameRender::letterScaledAmount = sf::Vector2f(ORIG_BOARD_TILE_SPRITE_SIZE * letterTileScale.x, ORIG_BOARD_TILE_SPRITE_SIZE * letterTileScale.y);
 
 GameRender::GameRender()
 {
@@ -35,60 +29,61 @@ size_t GameRender::RegisterTexture(std::string filename)
 
 	instance._textures.push_back(sf::Texture());
 
-	if (instance._textures.back().loadFromFile(filename))
+	if (!instance._textures.back().loadFromFile(filename))
 	{
-		std::cout << "Loaded texture from file " << filename << std::endl;
-	}
-	else
-	{
-		std::cout << "ERROR: Unable to load texture " << filename << std::endl;
+		throw std::invalid_argument("Could not load texture from file " + filename);
 	}
 
 	return instance._textures.size() - 1;
 }
 
-void GameRender::RegisterSprite(BoardTile& tile)
+void GameRender::RegisterSprite(std::unique_ptr<Drawable> object)
 {
 	GameRender& instance = *GetInstance();
 
-	GameRender::SetTileDisplay(tile, instance);
+	object->sprite.setTexture(instance._textures[object->TextureId()]);
+	object->sprite.setTextureRect(object->GetTextureRect());
+	object->sprite.setScale(object->GetScale());
 
-	instance._sprites.push_back(tile.sprite);
+	instance._drawables.push_back(*object);
+
+	//GameRender::SetTileDisplay(tile, instance);
+
+	//instance._sprites.push_back(tile.sprite);
 }
 
-void GameRender::RegisterLetterSprite(BoardTile& tile)
-{
-	GameRender& instance = *GetInstance();
+//void GameRender::RegisterLetterSprite(Tile& tile)
+//{
+//	GameRender& instance = *GetInstance();
+//
+//	GameRender::SetLetterTileDisplay(tile, instance);
+//
+//	instance._letterSprites.push_back(tile.sprite);
+//}
 
-	GameRender::SetLetterTileDisplay(tile, instance);
+//void GameRender::UpdateSprite(Tile& tile)
+//{
+//	GameRender& instance = *GetInstance();
+//
+//	GameRender::SetTileDisplay(tile, instance);
+//
+//	instance._sprites[0] = tile.sprite;
+//}
 
-	instance._letterSprites.push_back(tile.sprite);
-}
+//void GameRender::SetTileDisplay(Tile& tile, GameRender& instance)
+//{
+//	tile.sprite.setTexture(instance._textures[tile.TextureId()]);
+//	tile.sprite.setTextureRect(tile.GetTextureRect());
+//	tile.sprite.setScale(tile.GetScale());
+//}
 
-
-void GameRender::UpdateSprite(BoardTile& tile)
-{
-	GameRender& instance = *GetInstance();
-
-	GameRender::SetTileDisplay(tile, instance);
-
-	instance._sprites[0] = tile.sprite;
-}
-
-void GameRender::SetTileDisplay(BoardTile& tile, GameRender& instance)
-{
-	tile.sprite.setTexture(instance._textures[tile.GetId()]);
-	tile.sprite.setTextureRect(sf::IntRect(tile.startX, tile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
-	tile.sprite.setScale(tileScale.x, tileScale.y);
-}
-
-void GameRender::SetLetterTileDisplay(BoardTile& tile, GameRender& instance)
-{
-	tile.sprite.setTexture(instance._textures[tile.GetId()]);
-	std::cout << tile.startX << tile.startY << std::endl;
-	tile.sprite.setTextureRect(sf::IntRect(tile.startX, tile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
-	tile.sprite.setScale(tileScale.x, tileScale.y);
-}
+//void GameRender::SetLetterTileDisplay(Tile& tile, GameRender& instance)
+//{
+//	tile.sprite.setTexture(instance._textures[tile.Id()]);
+//	std::cout << tile.startX << tile.startY << std::endl;
+//	tile.sprite.setTextureRect(sf::IntRect(tile.startX, tile.startY, BOARD_TILE_WIDTH, BOARD_TILE_HEIGHT));
+//	tile.sprite.setScale(tileScale.x, tileScale.y);
+//}
 
 void GameRender::Draw(sf::RenderWindow& window)
 {
@@ -96,21 +91,14 @@ void GameRender::Draw(sf::RenderWindow& window)
 
 	window.draw(instance.rack.rack);
 
-	for (size_t i = 0; i < instance.rack.rackPositionVectors.size(); i++)
+	for (size_t i = 0; i < instance.rack.rackPositions.size(); i++)
 	{
-		window.draw(*instance.rack.rackPositionVectors[i]);
-
-		//std::cout << "Rack " << i << ": " << (*instance.rack.rackPositionVectors[i]).getPosition().x << ", " << (*instance.rack.rackPositionVectors[i]).getPosition().y << std::endl;
+		window.draw(instance.rack.rackPositions[i]->Rectangle);
 	}
 
-	for (size_t i = 0; i < instance._sprites.size(); i++)
+	for (size_t i = 0; i < instance._drawables.size(); i++)
 	{
-		window.draw(instance._sprites[i]);
-	}
-
-	for (size_t i = 0; i < instance._letterSprites.size(); i++)
-	{
-		window.draw(instance._letterSprites[i]);
+		window.draw(instance._drawables[i].sprite);
 	}
 }
 
@@ -120,32 +108,35 @@ void GameRender::DragSprite(sf::Vector2f& initialMousePosition, const sf::Render
 
 	if (GameRender::activeSprite != nullptr)
 	{
-		//std::cout << "initial position " << initialMousePosition.x << "," << initialMousePosition.y << std::endl;
+		std::cout << "active sprite" << std::endl;
 		sf::Vector2f positionChange = sf::Vector2f(sf::Mouse::getPosition(window)) - initialMousePosition;
 		initialMousePosition = sf::Vector2f(sf::Mouse::getPosition(window));
 		sf::Vector2f newPosition = activeSprite->getPosition() + positionChange;
 		activeSprite->setPosition(newPosition);
-		//std::cout << "active position " << activeSprite->getPosition().x << "," << activeSprite->getPosition().y << std::endl;
 	}
 	else
 	{
-		for (auto& sprite : instance._letterSprites)
+		for (auto& drawable : instance._drawables)
 		{
-			const sf::Vector2f& spritePosition = sprite.getPosition();
+			if (!drawable.IsDraggable)
+			{
+				continue;
+			}
+			const sf::Vector2f& spritePosition = drawable.sprite.getPosition();
 
 			if (spritePosition.x <= initialMousePosition.x
-				&& initialMousePosition.x <= spritePosition.x + scaledAmount.x
+				&& initialMousePosition.x <= spritePosition.x + drawable.sprite.getGlobalBounds().width
 				&& spritePosition.y <= initialMousePosition.y
-				&& initialMousePosition.y <= spritePosition.y + scaledAmount.y)
+				&& initialMousePosition.y <= spritePosition.y + drawable.sprite.getGlobalBounds().height)
 			{
-				GameRender::activeSprite = &sprite;
-				GameRender::initialLetterPosition = sprite.getPosition();
+				GameRender::activeSprite = &drawable.sprite;
+				GameRender::initialLetterPosition = drawable.sprite.getPosition();
 			}
 		}
 	}
 }
 
-void GameRender::DropSprite(sf::Vector2f& initialMousePosition, const sf::RenderWindow& window)
+void GameRender::DropSprite()
 {
 	if (GameRender::activeSprite == nullptr)
 	{
@@ -162,23 +153,21 @@ void GameRender::DropSprite(sf::Vector2f& initialMousePosition, const sf::Render
 
 	sf::Vector2f activeSpriteCenter(activeSprite->getPosition().x + centerX, activeSprite->getPosition().y + centerY);
 
-	//std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
-
-	for (auto& sprite : instance._sprites)
+	for (auto& drawable : instance._drawables)
 	{
-		const sf::Vector2f& spritePosition = sprite.getPosition();
-
-		//std::cout << "sprite pos: (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
-		//std::cout << "scale amt : (" << letterScaledAmount.x << ", " << letterScaledAmount.y << ")" << std::endl;
-
-		if (activeSpriteCenter.x >= sprite.getPosition().x
-			&& sprite.getPosition().x + sprite.getGlobalBounds().width >= activeSpriteCenter.x
-			&& activeSpriteCenter.y >= sprite.getPosition().y
-			&& sprite.getPosition().y + sprite.getGlobalBounds().height >= activeSpriteCenter.y)
+		if (!drawable.CanDropOn)
 		{
-			//std::cout << "valid sprite pos: (" << sprite.getPosition().x << ", " << sprite.getPosition().y << ")" << std::endl;
-			//std::cout << "Active center: (" << activeSpriteCenter.x << ", " << activeSpriteCenter.y << ")" << std::endl;
-			GameRender::activeSprite->setPosition(sprite.getPosition());
+			continue;
+		}
+
+		const sf::Vector2f& spritePosition = drawable.sprite.getPosition();
+
+		if (activeSpriteCenter.x >= drawable.sprite.getPosition().x
+			&& drawable.sprite.getPosition().x + drawable.sprite.getGlobalBounds().width >= activeSpriteCenter.x
+			&& activeSpriteCenter.y >= drawable.sprite.getPosition().y
+			&& drawable.sprite.getPosition().y + drawable.sprite.getGlobalBounds().height >= activeSpriteCenter.y)
+		{
+			GameRender::activeSprite->setPosition(drawable.sprite.getPosition());
 			isValidMove = true;
 			break;
 		}
@@ -186,16 +175,15 @@ void GameRender::DropSprite(sf::Vector2f& initialMousePosition, const sf::Render
 
 	if (!isValidMove)
 	{
-		for (size_t i = 0; i < instance.rack.rackPositionVectors.size(); i++)
+		for (size_t i = 0; i < instance.rack.rackPositions.size(); i++)
 		{
-			auto rackPosition = (*instance.rack.rackPositionVectors[i]);
+			auto rackPosition = instance.rack.rackPositions[i]->Rectangle;
 
 			if (activeSpriteCenter.x >= rackPosition.getPosition().x
 				&& rackPosition.getPosition().x + rackPosition.getGlobalBounds().width >= activeSpriteCenter.x
 				&& activeSpriteCenter.y >= rackPosition.getPosition().y
 				&& rackPosition.getPosition().y + rackPosition.getGlobalBounds().height >= activeSpriteCenter.y)
 			{
-				std::cout << "Valid move: " << i << std::endl;
 				GameRender::activeSprite->setPosition(rackPosition.getPosition());
 				isValidMove = true;
 				break;
@@ -204,9 +192,18 @@ void GameRender::DropSprite(sf::Vector2f& initialMousePosition, const sf::Render
 
 		if (!isValidMove)
 		{
-			GameRender::activeSprite->setPosition((*instance.rack.rackPositionVectors.front()).getPosition());
+			for (size_t i = 0; i < instance.rack.rackPositions.size(); i++)
+			{
+				if (!instance.rack.rackPositions[i]->IsEmpty)
+				{
+					continue;
+				}
+				auto rackPosition = instance.rack.rackPositions[i]->Rectangle;
+				GameRender::activeSprite->setPosition(instance.rack.rackPositions.front()->Rectangle.getPosition());
+				break;
+			}
 		}
-
-		GameRender::activeSprite = nullptr;
 	}
+
+	GameRender::activeSprite = nullptr;
 }

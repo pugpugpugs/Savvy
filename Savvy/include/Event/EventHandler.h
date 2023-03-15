@@ -16,14 +16,9 @@ public:
 	EventHandler();
 	~EventHandler();	
 	void HandleEvent(const sf::Event& event, const sf::RenderWindow& window);
-	//bool IsLeftClicked();
-	//sf::Vector2f GetMouseLeftClickCoords();
 	MouseEvents MouseEvents;
 
 private:
-	//bool _isLeftClicked;
-	//sf::Vector2f _mouseCoordinates;
-	//sf::Vector2f _mouseLeftClickCoords;
 	bool HandleMouseEvent(const sf::Event& event, const sf::RenderWindow& window);
 	bool MouseClickEvent(const sf::Event& event, const sf::RenderWindow& window);
 	bool MouseReleaseEvent(const sf::Event& event, const sf::RenderWindow& window);

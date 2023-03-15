@@ -1,27 +1,24 @@
 #pragma once
 #include <Common/Constants.h>
+#include <SFML/System.hpp>
 
 class Layout 
 {
 public:
 	static float OffsetX(int x) 
 	{
-		return  static_cast<float>(x * BOARD_TILE_WIDTH * (BOARD_TILE_SCALE_SIZE / BOARD_TILE_WIDTH));
+		return  static_cast<float>(x * TILEMAP_SPRITE_SIZE * (GAME_TILE_SIZE / TILEMAP_SPRITE_SIZE));
 	}
 
 	static float OffsetY(int y)
 	{
-		return   static_cast<float>(y * BOARD_TILE_HEIGHT * (BOARD_TILE_SCALE_SIZE / BOARD_TILE_HEIGHT));
+		return   static_cast<float>(y * TILEMAP_SPRITE_SIZE * (GAME_TILE_SIZE / TILEMAP_SPRITE_SIZE));
 	}
-	//static float LetterOffsetX(int x)
-	//{
-	//	return  static_cast<float>(x * ORIG_BOARD_TILE_WIDTH * (BOARD_TILE_SCALE_SIZE / ORIG_BOARD_TILE_WIDTH));
-	//}
 
-	//static float LetterOffsetY(int y)
-	//{
-	//	return   static_cast<float>(y * ORIG_BOARD_TILE_WIDTH * (BOARD_TILE_SCALE_SIZE / ORIG_BOARD_TILE_HEIGHT));
-	//}
+	static sf::Vector2f Offset(float x, float y)
+	{
+		return sf::Vector2f(OffsetX(x), OffsetY(y));
+	}
 private:
 	Layout();
 };

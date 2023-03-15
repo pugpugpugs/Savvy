@@ -4,8 +4,9 @@
 #include <iostream>
 #include <Board/DwTile.h>
 #include <Board/TwTile.h>
+#include <Board/LetterTile.h>
 
-std::unique_ptr<BoardTile> BoardTileFactory::CreateBoardTile(Enums::BoardTileType type)
+std::unique_ptr<Drawable> BoardTileFactory::CreateBoardTile(Enums::BoardTileType type)
 {
 	switch (type)
 	{
@@ -16,11 +17,12 @@ std::unique_ptr<BoardTile> BoardTileFactory::CreateBoardTile(Enums::BoardTileTyp
 		return std::make_unique<DwTile>();
 	case Enums::TWTile:
 		return std::make_unique<TwTile>();
+	case Enums::LetterTile:
+		return std::make_unique<LetterTile>();
 	case Enums::DLTile:
 	case Enums::TLTile:
 	default:
-		std::unique_ptr<BoardTile> test = std::make_unique<NormalTile>();
-		return test;
+		return std::make_unique<NormalTile>();
 		break;
 	}
 }
