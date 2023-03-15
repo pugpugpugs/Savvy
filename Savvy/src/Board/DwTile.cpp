@@ -1,24 +1,7 @@
-#include <iostream>
 #include "Board/DwTile.h"
-#include "Common/Constants.h"
-#include "Game/GameRender.h"
 
-DwTile::DwTile()
+DwTile::DwTile() : Tile(sf::Vector2f(64, 0))
 {
-	startX = DW_TILE_START_POS_X;
-	startY = DW_TILE_START_POS_Y;
+	CanDropOn = true;
 }
 
-DwTile::~DwTile()
-{
-}
-
-void DwTile::Initialize()
-{
-	_tileId = GameRender::RegisterTexture(DW_TILE_FILEPATH);
-}
-
-const int DwTile::GetId() 
-{
-	return _tileId;
-}

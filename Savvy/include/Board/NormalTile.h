@@ -1,13 +1,8 @@
 #pragma once
-#include "BoardTile.h"
+#include "Tile.h"
 
-class NormalTile : public BoardTile
+class NormalTile : public Tile
 {
 public:
 	NormalTile();
-	~NormalTile();
-	static void Initialize();
-	const int GetId();
-private:
-	inline static int tileId{ -1 };
 };

@@ -143,6 +143,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\Game\Drawable.cpp" />
+    <ClCompile Include="src\Savvy.cpp" />
     <ClCompile Include="src\State\PlayState.cpp" />
     <ClCompile Include="src\State\MainMenuState.cpp" />
     <ClCompile Include="src\State\GameState.cpp" />
@@ -154,7 +156,7 @@
     <ClCompile Include="src\Board\BoardTileFactory.cpp" />
     <ClCompile Include="src\Board\DwTile.cpp" />
     <ClCompile Include="src\Board\NormalTile.cpp" />
-    <ClCompile Include="src\Board\BoardTile.cpp" />
+    <ClCompile Include="src\Board\Tile.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Board\TwTile.cpp" />
     <ClCompile Include="src\Board\TileRack.cpp" />
@@ -170,13 +172,15 @@
     <Image Include="assets\woodtiles.png" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="include\Game\Drawable.h" />
+    <ClInclude Include="include\Savvy.h" />
     <ClInclude Include="include\State\GameState.h" />
     <ClInclude Include="include\Event\EventHandler.h" />
     <ClInclude Include="include\Game\GameRender.h" />
     <ClInclude Include="include\Game\Game.h" />
     <ClInclude Include="include\Board\BoardTileFactory.h" />
     <ClInclude Include="include\Board\DwTile.h" />
-    <ClInclude Include="include\Board\BoardTile.h" />
+    <ClInclude Include="include\Board\Tile.h" />
     <ClInclude Include="include\Board\NormalBoard.h" />
     <ClInclude Include="include\Common\Constants.h" />
     <ClInclude Include="include\Common\Enums.h" />

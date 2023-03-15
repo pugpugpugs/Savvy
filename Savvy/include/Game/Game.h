@@ -1,5 +1,5 @@
 #pragma once
-#include <Board/BoardTile.h>
+#include <Board/Tile.h>
 #include <Board/LetterTile.h>
 
 class GameState;
@@ -8,10 +8,11 @@ class Game
 {
 public:
 	sf::RenderWindow window;
-	std::vector<std::unique_ptr<BoardTile>> BoardTiles;
-	std::vector<std::unique_ptr<LetterTile>> LetterTiles;
+	//std::vector<std::unique_ptr<Tile>> BoardTiles;
+	//std::vector<std::unique_ptr<Tile>> LetterTiles;
 
 	Game();
+	void CreateWindow();
 	void Start();
 	void Initialize();
 	void PushState(GameState* state);

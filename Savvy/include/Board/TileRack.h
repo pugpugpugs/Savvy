@@ -1,17 +1,24 @@
 #pragma once
 #include <SFML/Graphics.hpp>
 
+
+struct TileRackPosition
+{
+	sf::RectangleShape Rectangle;
+	bool IsEmpty = true;
+};
+
+
 class TileRack
 {
 public:
 	sf::RectangleShape rack;
-	std::vector<std::unique_ptr<sf::RectangleShape>> rackPositionVectors;
+	std::vector<std::unique_ptr<TileRackPosition>> rackPositions;
 
 	TileRack();
 	~TileRack();
 	static void Initialize();
 	const int GetId();
-	//void Draw(sf::RenderWindow& window);
 	
 private:
 	inline static int _textureId { -1 };

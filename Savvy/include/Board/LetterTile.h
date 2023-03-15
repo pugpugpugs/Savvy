@@ -1,15 +1,9 @@
 #pragma once
-#include "Board/BoardTile.h"
+#include "Board/Tile.h"
 
-class LetterTile : public BoardTile
+class LetterTile : public Tile
 {
 public:
 	LetterTile();
-	~LetterTile();
-	static void Initialize();
-	const int GetId();
-
-protected:
-	inline static int tileId{ -1 };
 };
 
