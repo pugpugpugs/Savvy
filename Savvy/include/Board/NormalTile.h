@@ -1,8 +1,11 @@
-#pragma once
-#include "Tile.h"
-
-class NormalTile : public Tile
-{
-public:
-	NormalTile();
-};
+//#pragma once
+//#include "Tile.h"
+//
+//namespace sve
+//{
+//	class NormalTile : public Tile
+//	{
+//	public:
+//		NormalTile();
+//	};
+//}

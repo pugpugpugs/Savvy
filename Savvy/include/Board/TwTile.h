@@ -1,10 +1,13 @@
-#pragma once
-#include "Board/Tile.h"
-
-class TwTile : public Tile
-{
-public:
-	TwTile();
-};
-
-
+//#pragma once
+//#include "Board/Tile.h"
+//
+//namespace sve
+//{
+//	class TwTile : public Tile
+//	{
+//	public:
+//		TwTile();
+//	};
+//}
+//
+//

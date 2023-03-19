@@ -40,13 +40,13 @@
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v143</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -110,10 +110,11 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions);SAVVY_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -128,10 +129,11 @@
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions);SAVVY_BUILD_DLL</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(ProjectDir)\include;$(SolutionDir)\External\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <LanguageStandard>stdcpp20</LanguageStandard>
+      <PreprocessToFile>false</PreprocessToFile>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -144,14 +146,14 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="src\Game\Drawable.cpp" />
-    <ClCompile Include="src\Savvy.cpp" />
+    <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\State\PlayState.cpp" />
     <ClCompile Include="src\State\MainMenuState.cpp" />
     <ClCompile Include="src\State\GameState.cpp" />
     <ClCompile Include="src\Event\EventHandler.cpp" />
     <ClCompile Include="src\Board\LetterTile.cpp" />
     <ClCompile Include="src\Game\GameRender.cpp" />
-    <ClCompile Include="include\Board\Layout.h" />
+    <ClCompile Include="include\Board\MathOffsets.h" />
     <ClCompile Include="src\Game\Game.cpp" />
     <ClCompile Include="src\Board\BoardTileFactory.cpp" />
     <ClCompile Include="src\Board\DwTile.cpp" />
@@ -173,7 +175,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\Game\Drawable.h" />
-    <ClInclude Include="include\Savvy.h" />
+    <ClInclude Include="include\Engine.h" />
     <ClInclude Include="include\State\GameState.h" />
     <ClInclude Include="include\Event\EventHandler.h" />
     <ClInclude Include="include\Game\GameRender.h" />
@@ -190,6 +192,7 @@
     <ClInclude Include="include\State\PlayState.h" />
     <ClInclude Include="include\Board\TwTile.h" />
     <ClInclude Include="include\Board\TileRack.h" />
+    <ClInclude Include="include\Savvy.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

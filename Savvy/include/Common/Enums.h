@@ -1,15 +1,18 @@
-#pragma once
-
-namespace Enums
-{
-	enum BoardTileType
-	{
-		StartTile,
-		NormalTile,
-		DWTile,
-		TWTile,
-		DLTile,
-		TLTile,
-		LetterTile
-	};
-}
+//#pragma once
+//
+//namespace sve
+//{
+//	namespace Enums
+//	{
+//		enum class BoardTileType
+//		{
+//			StartTile,
+//			NormalTile,
+//			DWTile,
+//			TWTile,
+//			DLTile,
+//			TLTile,
+//			LetterTile
+//		};
+//	}
+//}

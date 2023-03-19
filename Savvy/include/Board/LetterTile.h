@@ -1,9 +1,12 @@
 #pragma once
 #include "Board/Tile.h"
 
-class LetterTile : public Tile
+namespace sve
 {
-public:
-	LetterTile();
-};
+	class LetterTile : public Tile
+	{
+	public:
+		LetterTile();
+	};
 
+}

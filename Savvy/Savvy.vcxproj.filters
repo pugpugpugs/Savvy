@@ -33,7 +33,7 @@
     <ClCompile Include="src\Game\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="include\Board\Layout.h">
+    <ClCompile Include="include\Board\MathOffsets.h">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\GameRender.cpp">
@@ -60,7 +60,7 @@
     <ClCompile Include="src\Board\TileRack.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="src\Savvy.cpp">
+    <ClCompile Include="src\Engine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="src\Game\Drawable.cpp">
@@ -142,10 +142,13 @@
     <ClInclude Include="include\Board\TileRack.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="include\Savvy.h">
+    <ClInclude Include="include\Engine.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="include\Game\Drawable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Savvy.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

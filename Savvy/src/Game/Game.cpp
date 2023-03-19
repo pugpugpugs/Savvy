@@ -1,119 +1,116 @@
 #include <iostream>
 #include "Game/Game.h"
 #include "Game/GameRender.h"
-#include "Board/NormalBoard.h"
-#include "Board/BoardTileFactory.h"
-#include "Board/Layout.h"
-#include "Board/NormalTile.h"
-#include "Board/DwTile.h"
 #include "State/MainMenuState.h"
 #include "State/PlayState.h"
-#include <Board/TwTile.h>
-#include <Board/TileRack.h>
+//#include <Board/TileRack.h>
 
-Game::Game()
+namespace sve
 {
-	CreateWindow();
-	Initialize();
-}
-
-void Game::CreateWindow()
-{
-	sf::ContextSettings settings;
-	settings.antialiasingLevel = 8;
-	window.create(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
-	window.setFramerateLimit(60);
-}
-
-void Game::Start()
-{
-	sf::Clock clock;
-
-	PushState(new PlayState(this));
-
-	while (window.isOpen())
+	Game::Game()
 	{
-		float elapsedSeconds = clock.restart().asSeconds();
-
-		if (CurrentState() == nullptr)
-		{
-			throw std::invalid_argument("Current state cannot be null.");
-		}
-
-		CurrentState()->Handle();
-
-		CurrentState()->Update(elapsedSeconds);
-
-		window.clear(sf::Color::Black);
-
-		CurrentState()->Draw(elapsedSeconds);
-
-		window.display();
+		CreateWindow();
+		Initialize();
 	}
-}
 
-void Game::CreateBoard()
-{
-	NormalBoard normalBoard;
-
-	int i = 0;
-	for (int y = 0; y < normalBoard.height; y++)
+	void Game::CreateWindow()
 	{
-		for (int x = 0; x < normalBoard.width; x++)
+		sf::ContextSettings settings;
+		settings.antialiasingLevel = 8;
+		window.create(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
+		window.setFramerateLimit(60);
+	}
+
+	void Game::Start()
+	{
+		sf::Clock clock;
+
+		PushState(new PlayState(this));
+
+		while (window.isOpen())
 		{
-			std::unique_ptr<Drawable> object = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
+			float elapsedSeconds = clock.restart().asSeconds();
 
-			object->SetPosition(Layout::Offset(x, y));
+			if (CurrentState() == nullptr)
+			{
+				throw std::invalid_argument("Current state cannot be null.");
+			}
 
-			GameRender::RegisterSprite(std::move(object));
-			i++;
+			CurrentState()->Handle();
+
+			CurrentState()->Update(elapsedSeconds);
+
+			window.clear(sf::Color::Black);
+
+			CurrentState()->Draw(elapsedSeconds);
+
+			window.display();
 		}
 	}
-}
 
-void Game::CreateLetters()
-{
-	TileRack rack;
+	//void Game::CreateBoard()
+	//{
+	//	NormalBoard normalBoard;
 
-	for (int i = 0; i < 4; i++)
+	//	int i = 0;
+	//	for (int y = 0; y < normalBoard.height; y++)
+	//	{
+	//		for (int x = 0; x < normalBoard.width; x++)
+	//		{
+	//			std::unique_ptr<Drawable> object = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
+
+	//			object->SetPosition(Layout::Offset(x, y));
+
+	//			GameRender::RegisterSprite(std::move(object));
+	//			i++;
+	//		}
+	//	}
+	//}
+
+	//void Game::CreateLetters()
+	//{
+	//	TileRack rack;
+
+	//	for (int i = 0; i < 4; i++)
+	//	{
+	//		auto letter = BoardTileFactory::CreateBoardTile(Enums::LetterTile);
+
+	//		sf::Vector2f position = rack.rackPositions[i]->Rectangle.getPosition();
+
+	//		letter->SetPosition(position);
+
+	//		GameRender::RegisterSprite(std::move(letter));
+	//		i++;
+	//	}
+	//}
+
+	void Game::Initialize()
 	{
-		auto letter = BoardTileFactory::CreateBoardTile(Enums::LetterTile);
+		GameRender::Initialize();
+		//Tile::Initialize();
+		//TileRack::Initialize();
 
-		sf::Vector2f position = rack.rackPositions[i]->Rectangle.getPosition();
-
-		letter->SetPosition(position);
-
-		GameRender::RegisterSprite(std::move(letter));
-		i++;
+		//CreateBoard();
+		//CreateLetters();
 	}
-}
 
-void Game::Initialize()
-{
-	GameRender::Initialize();
-	Tile::Initialize();
-	TileRack::Initialize();
-
-	CreateBoard();
-	CreateLetters();
-}
-
-void Game::PushState(GameState* state)
-{
-	_states.push_back(state);
-}
-
-void Game::PopState()
-{
-	delete _states.back();
-	_states.pop_back();
-}
-
-GameState* Game::CurrentState()
-{
-	if (_states.empty())
+	void Game::PushState(GameState* state)
 	{
-		return nullptr;
+		_states.push_back(state);
 	}
-	return _states.back();
+
+	void Game::PopState()
+	{
+		delete _states.back();
+		_states.pop_back();
+	}
+
+	GameState* Game::CurrentState()
+	{
+		if (_states.empty())
+		{
+			return nullptr;
+		}
+		return _states.back();
+	}
 }
