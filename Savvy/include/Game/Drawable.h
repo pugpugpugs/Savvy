@@ -21,6 +21,8 @@ namespace sve
 		sf::Sprite sprite;
 		bool IsDraggable = false;
 		bool CanDropOn = false;
+		bool operator > (const Drawable& obj) const;
+		bool operator < (const Drawable& obj) const;
 	protected:
 		float _startX = 0;
 		float _startY = 0;

@@ -51,4 +51,14 @@ namespace sve
 	{
 		return sf::Vector2f(_spriteSize, _spriteSize);
 	}
+
+	bool Drawable::operator > (const Drawable& obj) const
+	{
+		return ZStack > obj.ZStack;
+	}
+
+	bool Drawable::operator < (const Drawable& obj) const
+	{
+		return ZStack < obj.ZStack;
+	}
 }

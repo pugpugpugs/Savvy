@@ -5,9 +5,10 @@
 
 void Game::Start()
 {
+	Test();
 	CreateBoard();
-	CreateLetters();
-	CreateLetterBag();
+	//CreateLetters();
+	//CreateLetterBag();
 }
 
 void Game::CreateBoard()
@@ -31,6 +32,13 @@ void Game::CreateBoard()
 			i++;
 		}
 	}
+}
+
+void Game::Test()
+{
+	std::unique_ptr<LetterTile> tile = std::make_unique<LetterTile>();
+	tile->SetPosition(sf::Vector2f(0, 0));
+	sve::GameRender::RegisterSprite(*tile);
 }
 
 void Game::CreateLetterBag()
