@@ -101,6 +101,12 @@ namespace sve
 		//{
 		//	window.draw(instance.rack.rackPositions[i]->Rectangle);
 		//}
+		//std::vector<sve::Drawable*> sorted;
+
+		for (size_t i = 0; i < instance._drawables.size(); i++)
+		{
+			std::sort(instance._drawables.begin(), instance._drawables.end());
+		}
 
 		for (size_t i = 0; i < instance._drawables.size(); i++)
 		{

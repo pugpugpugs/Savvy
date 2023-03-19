@@ -12,6 +12,7 @@ public:
 	void CreateBoard();
 	void CreateLetterBag();
 	void CreateLetters();
+	void Test();
 
 };
 
