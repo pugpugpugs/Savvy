@@ -13,7 +13,7 @@ LetterTile::LetterTile()
 	_scaleRatio = GAME_TILE_SIZE / _spriteSize;
 	_scale = sf::Vector2f(_scaleRatio, _scaleRatio);
 	_tileMapCoords = sf::Vector2f(_startX, _startY);
-	ZStack = 1;
+	ZStack = 50;
 }
 
 void LetterTile::Initialize()

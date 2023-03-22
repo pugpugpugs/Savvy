@@ -1,4 +1,5 @@
 #include "Game/Drawable.h"
+#include <iostream>
 
 namespace sve
 {
@@ -60,5 +61,10 @@ namespace sve
 	bool Drawable::operator < (const Drawable& obj) const
 	{
 		return ZStack < obj.ZStack;
+	}
+
+	void Drawable::Draw(sf::RenderWindow& window)
+	{
+		window.draw(sprite);
 	}
 }
