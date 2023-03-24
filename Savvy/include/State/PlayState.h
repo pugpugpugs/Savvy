@@ -12,6 +12,7 @@ namespace sve
 		void Draw(const float elapsedSeconds);
 		void Update(const float elapsedSeconds);
 		void Handle();
+		virtual std::string GetState() override;
 
 	private:
 		EventHandler _handler;

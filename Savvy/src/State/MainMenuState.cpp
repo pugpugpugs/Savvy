@@ -9,6 +9,11 @@ namespace sve
 		this->game = game;
 	}
 
+	std::string MainMenuState::GetState()
+	{
+		return State::MainMenu;
+	};
+
 	void MainMenuState::Draw(const float elapsedSeconds)
 	{
 		sf::RectangleShape rect;

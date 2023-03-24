@@ -1,6 +1,5 @@
 #include <iostream>
 #include "Game/GameRender.h"
-#include <Board/Tile.h>
 
 namespace sve
 {
@@ -116,7 +115,7 @@ namespace sve
 		GameRender& instance = *GetInstance();
 		sf::Vector2f mouseReleasePosition = sf::Vector2f(sf::Mouse::getPosition());
 
-		bool isValidMove = false;
+		//bool isValidMove = false;
 
 		float centerX = activeSprite->getGlobalBounds().width / 2;
 		float centerY = activeSprite->getGlobalBounds().height / 2;
@@ -138,13 +137,13 @@ namespace sve
 				&& drawable->sprite.getPosition().y + drawable->sprite.getGlobalBounds().height >= activeSpriteCenter.y)
 			{
 				GameRender::activeSprite->setPosition(drawable->sprite.getPosition());
-				isValidMove = true;
+				//isValidMove = true;
 				break;
 			}
 		}
 
-		if (!isValidMove)
-		{
+		//if (!isValidMove)
+		//{
 			//for (size_t i = 0; i < instance.rack.rackPositions.size(); i++)
 			//{
 			//	auto rackPosition = instance.rack.rackPositions[i]->Rectangle;
@@ -173,7 +172,7 @@ namespace sve
 			//		break;
 			//	}
 			//}
-		}
+		//}
 
 		GameRender::activeSprite = nullptr;
 	}

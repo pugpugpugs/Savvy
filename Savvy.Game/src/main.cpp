@@ -3,6 +3,7 @@
 #include "Game/Game.h"
 #include "Tile/TileRack.h"
 #include <Tile/TileBag.h>
+#include <typeinfo>
 
 int main()
 {
@@ -16,7 +17,13 @@ int main()
 	Game game;
 	game.Start();
 	
-	engine.Start();
+
+	while (true)
+	{
+		engine.Run();
+		//auto test = engine.GetState();
+		//std::cout << "state: " << test << std::endl;
+	}
 
 	return 0;
 
