@@ -9,6 +9,7 @@ namespace sve
 	{
 	public:
 		sf::RenderWindow window;
+		sf::Clock clock;
 		//std::vector<std::unique_ptr<Tile>> BoardTiles;
 		//std::vector<std::unique_ptr<Tile>> LetterTiles;
 
@@ -19,6 +20,7 @@ namespace sve
 		void PushState(GameState* state);
 		void PopState();
 		GameState* CurrentState();
+		std::string GetState();
 
 	private:
 		std::vector<GameState*> _states;

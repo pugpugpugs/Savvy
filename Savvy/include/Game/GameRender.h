@@ -1,7 +1,5 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-//#include <Board/TileRack.h>
-#include "Engine.h"
 #include "Game/Drawable.h"
 
 namespace sve
@@ -16,6 +14,7 @@ namespace sve
 		static size_t RegisterTexture(std::string filename);
 		//static void UpdateSprite(Tile& tile);
 		static void RegisterSprite(Drawable& object);
+		static void RegisterSfmlShape(sve::Drawable& object);
 		//static void RegisterLetterSprite(Tile& tile);
 		static void Draw(sf::RenderWindow& window);
 		static void DragSprite(sf::Vector2f& mousePosition, const sf::RenderWindow& window);
@@ -25,7 +24,8 @@ namespace sve
 	private:
 		static GameRender* _instance;
 		std::vector<sf::Texture> _textures;
-		std::vector<Drawable> _drawables;
+		std::vector<Drawable*> _drawables;
+		std::vector<sf::RectangleShape> _sfShapes;
 
 		//TileRack rack;
 

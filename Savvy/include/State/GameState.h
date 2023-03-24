@@ -12,6 +12,7 @@ namespace sve
 		virtual void Draw(const float elapsedSecond) = 0;
 		virtual void Update(const float elapsedSecond) = 0;
 		virtual void Handle() = 0;
+		virtual std::string GetState() = 0;
 	};
 }
 

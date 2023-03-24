@@ -1,6 +1,7 @@
 #include "State/PlayState.h"
 #include <Game/GameRender.h>
 #include "Game/Game.h"
+#include "Common/Common.h"
 
 namespace sve
 {
@@ -8,6 +9,11 @@ namespace sve
 	{
 		this->game = game;
 	}
+
+	std::string PlayState::GetState()
+	{
+		return State::Play;
+	};
 
 	void PlayState::Draw(const float elapsedSeconds)
 	{

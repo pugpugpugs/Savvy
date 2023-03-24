@@ -3,10 +3,16 @@
 #include "Tile/TileFactory.h"
 #include "Constants.h"
 
+Game::Game()
+{
+
+}
+
 void Game::Start()
 {
 	Test();
 	CreateBoard();
+	CreateRacks();
 	//CreateLetters();
 	//CreateLetterBag();
 }
@@ -34,11 +40,22 @@ void Game::CreateBoard()
 	}
 }
 
+void Game::CreateRacks()
+{
+	sve::GameRender::RegisterSfmlShape(Rack);
+	for (auto &pos : Rack.RackPositions)
+	{
+		sve::GameRender::RegisterSfmlShape(*pos);
+	}
+}
+
 void Game::Test()
 {
 	std::unique_ptr<LetterTile> tile = std::make_unique<LetterTile>();
 	tile->SetPosition(sf::Vector2f(0, 0));
 	sve::GameRender::RegisterSprite(*tile);
+
+	Letters.push_back(std::move(tile));
 }
 
 void Game::CreateLetterBag()

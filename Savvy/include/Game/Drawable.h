@@ -1,6 +1,6 @@
 #pragma once
 #include <SFML/Graphics.hpp>
-#include "Engine.h"
+#include "Common/Common.h"
 
 namespace sve
 {
@@ -17,6 +17,9 @@ namespace sve
 		virtual const int TextureId();
 		const sf::Vector2f GetSpriteSize();
 		const sf::Vector2f GetPosition();
+
+		void virtual Draw(sf::RenderWindow& window);
+
 		void SetPosition(const sf::Vector2f position);
 		sf::Sprite sprite;
 		bool IsDraggable = false;
@@ -31,6 +34,13 @@ namespace sve
 		sf::Vector2f _scale;
 		sf::Vector2f _tileMapCoords;
 		int _textureId = -1;
+	};
+
+	struct PointerCompare {
+		bool operator()(const sve::Drawable* obj1, const sve::Drawable* obj2) const
+		{
+			return *obj1 < *obj2;
+		}
 	};
 }
 
