@@ -1,38 +1,29 @@
 #include <iostream>
 #include "Game/Game.h"
 #include "Game/GameRender.h"
-#include "Board/NormalBoard.h"
-#include "Board/BoardTileFactory.h"
-#include "Board/Layout.h"
-#include "Board/NormalTile.h"
-#include "Board/DwTile.h"
 #include "State/MainMenuState.h"
 #include "State/PlayState.h"
-#include <Board/TwTile.h>
-#include <Board/TileRack.h>
 
-Game::Game()
+namespace sve
 {
-	CreateWindow();
-	Initialize();
-}
-
-void Game::CreateWindow()
-{
-	sf::ContextSettings settings;
-	settings.antialiasingLevel = 8;
-	window.create(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
-	window.setFramerateLimit(60);
-}
-
-void Game::Start()
-{
-	sf::Clock clock;
-
-	PushState(new PlayState(this));
-
-	while (window.isOpen())
+	Game::Game()
 	{
+		CreateWindow();
+		Initialize();
+	}
+
+	void Game::CreateWindow()
+	{
+		sf::ContextSettings settings;
+		settings.antialiasingLevel = 8;
+		window.create(sf::VideoMode(1600, 900), "Savvy", sf::Style::Default, settings);
+		window.setFramerateLimit(60);
+	}
+
+	void Game::Start()
+	{
+		//while (window.isOpen())
+		//{
 		float elapsedSeconds = clock.restart().asSeconds();
 
 		if (CurrentState() == nullptr)
@@ -49,71 +40,38 @@ void Game::Start()
 		CurrentState()->Draw(elapsedSeconds);
 
 		window.display();
+		//}
 	}
-}
 
-void Game::CreateBoard()
-{
-	NormalBoard normalBoard;
-
-	int i = 0;
-	for (int y = 0; y < normalBoard.height; y++)
+	void Game::Initialize()
 	{
-		for (int x = 0; x < normalBoard.width; x++)
+		GameRender::Initialize();
+
+		PushState(new PlayState(this));
+	}
+
+	void Game::PushState(GameState* state)
+	{
+		_states.push_back(state);
+	}
+
+	void Game::PopState()
+	{
+		delete _states.back();
+		_states.pop_back();
+	}
+
+	GameState* Game::CurrentState()
+	{
+		if (_states.empty())
 		{
-			std::unique_ptr<Drawable> object = BoardTileFactory::CreateBoardTile(normalBoard.standardBoardMap[i]);
-
-			object->SetPosition(Layout::Offset(x, y));
-
-			GameRender::RegisterSprite(std::move(object));
-			i++;
+			return nullptr;
 		}
+		return _states.back();
 	}
-}
 
-void Game::CreateLetters()
-{
-	TileRack rack;
-
-	for (int i = 0; i < 4; i++)
+	std::string Game::GetState()
 	{
-		auto letter = BoardTileFactory::CreateBoardTile(Enums::LetterTile);
-
-		sf::Vector2f position = rack.rackPositions[i]->Rectangle.getPosition();
-
-		letter->SetPosition(position);
-
-		GameRender::RegisterSprite(std::move(letter));
-		i++;
+		return _states.back()->GetState();
 	}
-}
-
-void Game::Initialize()
-{
-	GameRender::Initialize();
-	Tile::Initialize();
-	TileRack::Initialize();
-
-	CreateBoard();
-	CreateLetters();
-}
-
-void Game::PushState(GameState* state)
-{
-	_states.push_back(state);
-}
-
-void Game::PopState()
-{
-	delete _states.back();
-	_states.pop_back();
-}
-
-GameState* Game::CurrentState()
-{
-	if (_states.empty())
-	{
-		return nullptr;
-	}
-	return _states.back();
 }

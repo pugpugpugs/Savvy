@@ -2,17 +2,21 @@
 #include "GameState.h"
 #include <Game/Game.h>
 
-class MainMenuState : public GameState
+namespace sve
 {
-public:
-	MainMenuState(Game* game);
-	void Draw(const float elapsedSeconds);
-	void Update(const float elapsedSeconds);
-	void Handle();
+	class MainMenuState : public GameState
+	{
+	public:
+		MainMenuState(Game* game);
+		void Draw(const float elapsedSeconds);
+		void Update(const float elapsedSeconds);
+		void Handle();
+		virtual std::string GetState() override;
 
-private:
-	sf::View view;
+	private:
+		sf::View view;
 
-	void LoadGame();
-};
+		void LoadGame();
+	};
+}
 

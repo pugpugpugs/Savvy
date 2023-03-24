@@ -1,28 +1,32 @@
 #pragma once
-#include <Board/Tile.h>
-#include <Board/LetterTile.h>
+#include "Game/GameRender.h"
 
-class GameState;
-
-class Game
+namespace sve
 {
-public:
-	sf::RenderWindow window;
-	//std::vector<std::unique_ptr<Tile>> BoardTiles;
-	//std::vector<std::unique_ptr<Tile>> LetterTiles;
+	class GameState;
 
-	Game();
-	void CreateWindow();
-	void Start();
-	void Initialize();
-	void PushState(GameState* state);
-	void PopState();
-	GameState* CurrentState();
+	class Game
+	{
+	public:
+		sf::RenderWindow window;
+		sf::Clock clock;
+		//std::vector<std::unique_ptr<Tile>> BoardTiles;
+		//std::vector<std::unique_ptr<Tile>> LetterTiles;
 
-private:
-	std::vector<GameState*> _states;
+		Game();
+		void CreateWindow();
+		void Start();
+		void Initialize();
+		void PushState(GameState* state);
+		void PopState();
+		GameState* CurrentState();
+		std::string GetState();
 
-	void CreateBoard();
-	void CreateLetters();
-};
+	private:
+		std::vector<GameState*> _states;
+
+		void CreateBoard();
+		void CreateLetters();
+	};
+}
 
